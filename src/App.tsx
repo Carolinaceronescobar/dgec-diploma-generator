@@ -1,12 +1,10 @@
-import { useState } from 'react'
-import './App.css'
+import HorizontalLinearStepper from './components/HorizontalLinearStepper'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      hola mundo
+      <HorizontalLinearStepper/>
     </>
   )
 }
