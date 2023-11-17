@@ -73,6 +73,8 @@ const HorizontalLinearStepper: React.FC = () => {
 
   return (
     <Box sx={{ width: '100%' }}>
+      
+      {/* Pasos del formulario */}
       <Stepper activeStep={activeStep}>
         {steps.map((label, index) => {
           const stepProps: { completed?: boolean } = {};
@@ -94,7 +96,11 @@ const HorizontalLinearStepper: React.FC = () => {
           );
         })}
       </Stepper>
+      
+      {/* Formulario */}
       {forms[activeStep]}
+      
+      {/* CTAs del Stepper */}
       <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
         <Button
           color="inherit"

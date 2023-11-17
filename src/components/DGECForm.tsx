@@ -9,6 +9,8 @@ import InputAdornment from '@mui/material/InputAdornment';
 import AttachmentTwoToneIcon from '@mui/icons-material/AttachmentTwoTone';
 import Typography from '@mui/material/Typography';
 
+import style from './DGECForm.module.css'
+
 const DGECForm: React.FC = () => {
   const [data, setData] = useState({
     hasPreviousPeriods: 'no',
@@ -64,6 +66,11 @@ const DGECForm: React.FC = () => {
 
   return (
     <form>
+      
+      <p className={style.commentForm}>
+        <b>Nota:</b>  Comentario de prueba.
+      </p>
+
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <RadioGroup

@@ -8,10 +8,12 @@ const App: React.FC = () => {
   return (
     <div>
       <TopBar />
-      <h1>Solicitud Creación de Programa</h1>
-      <HorizontalLinearStepper />
+      <div className="container">
+        <h1>Solicitud Creación de Programa</h1>
+        <HorizontalLinearStepper/>
+      </div>
     </div>
   );
 };
-
+    
 export default App;
