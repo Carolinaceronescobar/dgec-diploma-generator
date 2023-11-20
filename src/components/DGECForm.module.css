@@ -1,3 +1,4 @@
+/* Este bloque de código define estilos CSS para una clase llamada .commentForm */
 .commentForm {
-  color: red;
+  color: red; /* Establece el color del texto en rojo para elementos con la clase .commentForm */
 }

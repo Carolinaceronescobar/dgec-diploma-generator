@@ -1,185 +1,94 @@
-import React, { useState, useRef } from 'react';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
-import InputAdornment from '@mui/material/InputAdornment';
-import AttachmentTwoToneIcon from '@mui/icons-material/AttachmentTwoTone';
-import Typography from '@mui/material/Typography';
+import React, { useState } from 'react';
+import {
+  Container,
+  Typography,
+  FormControl,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  MenuItem,
+  Select,
+  TextField,
+  Button,
+  Box,
+  InputLabel,
+} from '@mui/material';
 
-import style from './DGECForm.module.css'
+const FormularioDGEC: React.FC = () => {
+  const [haDictadoPrograma, setHaDictadoPrograma] = useState<string>('');
 
-const DGECForm: React.FC = () => {
-  const [data, setData] = useState({
-    hasPreviousPeriods: 'no',
-    courses: [] as string[],
-    newCourse: {
-      name: '',
-      professor: '',
-      modules: '',
-    },
-    authorizationMemo: '',
-    attachedFile: null as File | null,
-  });
-
-  const coursesList = ['Curso A', 'Curso B', 'Curso C']; // Ejemplo de lista de cursos desde la base de datos
-
-  const newCourseRef = useRef<HTMLInputElement | null>(null);
-  const authorizationMemoRef = useRef<HTMLInputElement | null>(null);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setData({
-      ...data,
-      [e.target.name]: e.target.value,
-    });
+  const handleHaDictadoProgramaChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setHaDictadoPrograma(event.target.value);
   };
 
-  const handleNewCourseChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setData({
-      ...data,
-      newCourse: {
-        ...data.newCourse,
-        [e.target.name]: e.target.value,
-      },
-    });
+  const [programaSeleccionado, setProgramaSeleccionado] = useState<string>('');
+
+  const handleProgramaSeleccionadoChange = (
+    event: React.ChangeEvent<{ value: unknown }>
+  ) => {
+    setProgramaSeleccionado(event.target.value as string);
   };
 
-  const handleAttachedFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const attachedFile = e.target.files?.[0] || null;
-    setData({
-      ...data,
-      attachedFile,
-    });
-  };
-
-  const handleSave = () => {
-    // Lógica para guardar datos sin enviar
-    console.log('Datos guardados:', data);
-  };
-
-  const handleNext = () => {
-    // Lógica para enviar datos
-    console.log('Datos enviados:', data);
+  const handleGuardarClick = () => {
+    // Lógica para guardar el formulario
+    console.log('Formulario guardado');
   };
 
   return (
-    <form>
-      
-      <p className={style.commentForm}>
-        <b>Nota:</b>  Comentario de prueba.
-      </p>
+    <Container>
+      <Typography variant="h4">Información relevante para DGEC</Typography>
 
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <RadioGroup
-            aria-label="¿Se ha dictado este programa académico en periodos anteriores?"
-            name="hasPreviousPeriods"
-            value={data.hasPreviousPeriods}
-            onChange={handleChange}
-          >
-            <FormControlLabel value="si" control={<Radio />} label="Sí" />
-            <FormControlLabel value="no" control={<Radio />} label="No" />
-          </RadioGroup>
-        </Grid>
-        {data.hasPreviousPeriods === 'si' ? (
-          <Grid item xs={12}>
-            {/* Listado de cursos desde la base de datos */}
-            <TextField
-              label="Seleccione el curso"
-              name="courses"
-              select
-              fullWidth
-              value={data.courses}
-              onChange={handleChange}
-              SelectProps={{
-                multiple: true,
-                renderValue: (selected) => (selected as string[]).join(', '),
-              }}
+      {/* Programa */}
+      <Typography variant="h6">Programa</Typography>
+      <FormControl component="fieldset">
+        <RadioGroup
+          row
+          aria-label="haDictadoPrograma"
+          name="haDictadoPrograma"
+          value={haDictadoPrograma}
+          onChange={handleHaDictadoProgramaChange}
+        >
+          <FormControlLabel value="si" control={<Radio />} label="Sí" />
+          <FormControlLabel value="no" control={<Radio />} label="No" />
+        </RadioGroup>
+      </FormControl>
+
+      {/* Pregunta adicional si la respuesta es "Sí" */}
+      {haDictadoPrograma === 'si' && (
+        <div>
+          <Typography variant="subtitle1">Seleccione el programa académico</Typography>
+          <FormControl fullWidth>
+            <InputLabel id="programa-academico-label">Programa académico</InputLabel>
+            <Select
+              labelId="programa-academico-label"
+              id="programa-academico"
+              value={programaSeleccionado}
+              onChange={handleProgramaSeleccionadoChange}
             >
-              {coursesList.map((course) => (
-                <option key={course} value={course}>
-                  {course}
-                </option>
-              ))}
-            </TextField>
-          </Grid>
-        ) : (
-          <>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                label="Nombre del curso"
-                name="name"
-                value={data.newCourse.name}
-                onChange={handleNewCourseChange}
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <TextField
-                label="Nombre del profesor"
-                name="professor"
-                value={data.newCourse.professor}
-                onChange={handleNewCourseChange}
-                fullWidth
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                label="Nombre de los módulos a dictar en el curso"
-                name="modules"
-                value={data.newCourse.modules}
-                onChange={handleNewCourseChange}
-                fullWidth
-              />
-            </Grid>
-          </>
-        )}
-        <Grid item xs={12}>
-          <TextField
-            label="Adjuntar el memo de autorización de la DGEC para impartir el programa"
-            name="authorizationMemo"
-            value={data.authorizationMemo}
-            onChange={handleChange}
-            fullWidth
-            margin="normal"
-            inputRef={authorizationMemoRef}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <label htmlFor="attachment-input">
-                    <AttachmentTwoToneIcon color="primary" />
-                  </label>
-                  <input
-                    id="attachment-input"
-                    type="file"
-                    accept=".pdf,.doc,.docx"
-                    style={{ display: 'none' }}
-                    onChange={handleAttachedFileChange}
-                  />
-                </InputAdornment>
-              ),
-            }}
-          />
-          <Typography variant="body2" color="textSecondary">
-            Adjunta el memo de autorización en formato PDF o Word.
-          </Typography>
-        </Grid>
-        <Grid item xs={6}>
-        <Button variant="contained" color="primary" fullWidth onClick={handleSave}>
-            Guardar sin enviar
-        </Button>
+              {/* Opciones de programas académicos disponibles */}
+              <MenuItem value="programa1">Programa 1</MenuItem>
+              <MenuItem value="programa2">Programa 2</MenuItem>
+            </Select>
+          </FormControl>
+        </div>
+      )}
 
-        </Grid>
-        <Grid item xs={6}>
-          <Button variant="contained" color="primary" fullWidth onClick={handleNext}>
-            Siguiente
-          </Button>
-        </Grid>
-      </Grid>
-    </form>
+      {/* Autorización */}
+      <Typography variant="h6">Autorización</Typography>
+      <Typography variant="body1">
+        Adjunte el memo de autorización de la DGEC para impartir el programa
+      </Typography>
+      <Box mt={2}>
+        <TextField type="file" label="Adjuntar archivo" fullWidth />
+      </Box>
+      <Box mt={2}>
+        <Button variant="contained" color="primary" onClick={handleGuardarClick}>
+          Guardar sin enviar
+        </Button>
+      </Box>
+      <Typography variant="body2">Límite de archivo: 5 MB</Typography>
+    </Container>
   );
 };
 
-export default DGECForm;
+export default FormularioDGEC;
