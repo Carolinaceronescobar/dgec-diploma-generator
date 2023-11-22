@@ -5,10 +5,10 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import DGECForm from './DGECForm';
-import RegistroCurricularForm from './RegistroCurricularForm';
-import AdmisionForm from './AdmisionForm';
-import FinanzasForm from './FinanzasForm';
+import DGECForm from './Form/DGECForm';
+import RegistroCurricularForm from './Form/RegistroCurricularForm';
+import AdmisionForm from './Form/AdmisionForm';
+import FinanzasForm from './Form/FinanzasForm';
 import SolicitudesForm from './SolicitudesForm';
 
 const steps = [
@@ -66,11 +66,7 @@ const HorizontalLinearStepper: React.FC = () => {
       return newSkipped;
     });
   };
-
-  const handleReset = () => {
-    setActiveStep(0);
-  };
-
+  
   return (
     <Box sx={{ width: '100%' }}>
       

@@ -13,6 +13,8 @@ import {
   Radio,
 } from '@mui/material';
 import Box from '@mui/system/Box';
+import UsoInternoDGEC from './UsoInterno/UsointernoDGEC';
+import UsoInternoDireccionEstudios from './UsoInterno/UsointernoDireccionEstudios';
 
 const FormularioRegistroCurricular: React.FC = () => {
   return (
@@ -24,7 +26,7 @@ const FormularioRegistroCurricular: React.FC = () => {
       <Box>
         <Typography variant="h5">Programa</Typography>
         <hr />
-
+        {/* sx={{ position: focused || selectedValue ? 'relative' : 'absolute', top: -2 }} */}
         <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
           <FormControl component="fieldset">
             <InputLabel htmlFor="regcur_nivel">Nivel del Programa Académico *</InputLabel>
@@ -194,35 +196,23 @@ const FormularioRegistroCurricular: React.FC = () => {
         </Box>
       </Box>
 
-      <Box>
-        <Typography variant="h5">Uso interno Dirección Estudios</Typography>
-        <hr />
+      <Typography variant="h4" align="center" mt={4} mb={5}>
+        Información relevante para Registro Curricular
+      </Typography>
 
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
-          <TextField fullWidth id="regcur_codprog" label="INTERNO - Código del Programa (SIGA)" variant="outlined" />
-          <TextField fullWidth id="regcur_coddgec" label="INTERNO - Código DGATCAP" variant="outlined" />
-        </Box>
+      {/* Componente para Uso interno DGEC */}
+      <UsoInternoDGEC />
 
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
-          <FormControl fullWidth>
-            <InputLabel htmlFor="regcur_perprog">INTERNO - Periodo académico en que se impartirá</InputLabel>
-            <Select id="regcur_perprog" label="Periodo académico en que se impartirá">
-              <MenuItem value="2024-1">2024-1</MenuItem>
-              <MenuItem value="2023-2">2023-2</MenuItem>
-              <MenuItem value="2023-1">2023-1</MenuItem>
-            </Select>
-          </FormControl>
-        </Box>
-      </Box>
+      {/* Componente para Uso interno Dirección de Estudios */}
+      <UsoInternoDireccionEstudios />
 
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
         <Button variant="outlined" color="secondary" className="float-left">
           Guardar sin enviar
         </Button>
-        <Button variant="contained" color="primary" className="float-right">
-          Siguiente
-        </Button>
       </Box>
+
+
     </Container>
   );
 };
