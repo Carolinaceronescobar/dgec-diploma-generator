@@ -24,7 +24,7 @@ const UsoInternoDGEC: React.FC<UsoInternoDGECProps> = ({
 }) => {
   return (
     <Box>
-      <Typography variant="h5">Uso interno DGEC</Typography>
+      <Typography variant="h5" sx={{ marginTop: 2, marginBottom: 2, fontWeight: 'bold' }}>Uso interno DGEC</Typography>
       <hr />
 
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>

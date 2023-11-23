@@ -47,7 +47,7 @@ const UsoInternoFinanzas: React.FC<UsointernoFinanzasProps> = ({
 }) => {
   return (
     <Box>
-      <Typography variant="h5">Uso interno Finanzas</Typography>
+      <Typography variant="h5" sx={{ marginTop: 2, marginBottom: 2, fontWeight: 'bold' }}>Uso interno Finanzas</Typography>
       <hr />
 
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
@@ -75,7 +75,7 @@ const UsoInternoFinanzas: React.FC<UsointernoFinanzasProps> = ({
       </Box>
 
       <Box mt={3}>
-        <Typography variant="body1"> INTERNO - Distribución Presupuestaria del Código de Detalle </Typography>
+        <Typography variant="body1" sx={{ marginTop: 2, marginBottom: 2, fontWeight: 'bold' }}> INTERNO - Distribución Presupuestaria del Código de Detalle </Typography>
         <FormControl component="fieldset">
           <RadioGroup
             row

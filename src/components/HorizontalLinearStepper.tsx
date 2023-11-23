@@ -9,10 +9,10 @@ import DGECForm from './Form/DGECForm';
 import RegistroCurricularForm from './Form/RegistroCurricularForm';
 import AdmisionForm from './Form/AdmisionForm';
 import FinanzasForm from './Form/FinanzasForm';
-import SolicitudesForm from './SolicitudesForm';
+import SolicitudesForm from './Form/SolicitudesForm';
 
 const steps = [
-  'DGEC',
+  'Autorización',
   'Registro Curricular',
   'Admisión',
   'Finanzas',
@@ -24,7 +24,7 @@ const forms = [
   <RegistroCurricularForm />,
   <AdmisionForm />,
   <FinanzasForm />,
-  <SolicitudesForm />,
+  <SolicitudesForm solicitudes={[]} />,
 ];
 
 const HorizontalLinearStepper: React.FC = () => {

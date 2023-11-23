@@ -109,12 +109,12 @@ const RegistroCurricularForm: React.FC = () => {
 
   return (
     <Container>
-      <Typography variant="h4" align="center" mt={4} mb={5}>
+      <Typography variant="h4" align="center" mt={4} mb={5} sx={{ marginTop: 2, marginBottom: 2, fontWeight: 'bold' }}>
         Información relevante para Registro Curricular
       </Typography>
 
       <Box>
-        <Typography variant="h5">Programa</Typography>
+        <Typography variant="h5" sx={{ marginTop: 2, marginBottom: 2, fontWeight: 'bold' }}>Programa</Typography>
         <hr />
         {/* sx={{ position: focused || selectedValue ? 'relative' : 'absolute', top: -2 }} */}
         <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
@@ -167,13 +167,14 @@ const RegistroCurricularForm: React.FC = () => {
         </Box>
 
         <Box>
-          <Typography variant="h5">Donde se imparte el Programa</Typography>
+          <Typography variant="h5" sx={{ marginTop: 2, marginBottom: 2, fontWeight: 'bold' }}> Donde se imparte el Programa</Typography>
           <hr />
 
           <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
             <FormControl fullWidth>
             <Typography variant="subtitle1">Departamento o Unidad</Typography>
-              <Select id="regcur_depprog" label="Departamento o Unidad">
+              <Select id="regcur_depprog" label="Departamento o Unidad" variant="outlined"
+            sx={{ mr: 2 }}>
                 <MenuItem value="Dpto 1">Departamento de Electrónica</MenuItem>
                 <MenuItem value="Dpto 2">
                   Departamento de Construcción y Prevención de Riesgos
@@ -185,8 +186,9 @@ const RegistroCurricularForm: React.FC = () => {
             </FormControl>
 
             <FormControl fullWidth>
-            <Typography variant="subtitle1">Emplazamiento</Typography>
-              <Select id="regcur_sedeprog" label="Emplazamiento">
+            <Typography variant="subtitle1" >Emplazamiento</Typography>
+              <Select id="regcur_sedeprog" label="Emplazamiento" variant="outlined"
+            sx={{ mr: 2 }}>
                 <MenuItem value="Campus 1">Campus Casa Central Valparaíso</MenuItem>
                 <MenuItem value="Campus 2">Campus San Joaquín</MenuItem>
                 <MenuItem value="Campus 3">Campus Vitacura</MenuItem>
@@ -255,7 +257,7 @@ const RegistroCurricularForm: React.FC = () => {
       </Box>
 
       <Box>
-        <Typography variant="h5">Duración</Typography>
+        <Typography variant="h5" sx={{ marginTop: 2, marginBottom: 2, fontWeight: 'bold' }}>Duración</Typography>
         <hr />
 
         <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
@@ -286,8 +288,8 @@ const RegistroCurricularForm: React.FC = () => {
         </Box>
       </Box>
 
-      <Typography variant="h4" align="center" mt={4} mb={5}>
-        Uso Interno Dptos
+      <Typography variant="h5" align="center" mt={4} mb={5} sx={{ marginTop: 2, marginBottom: 2, fontWeight: 'bold' }}>
+        USO INTERNO DEPARTAMENTOS
       </Typography>
 
       {/* Componente para Uso interno DGEC */}

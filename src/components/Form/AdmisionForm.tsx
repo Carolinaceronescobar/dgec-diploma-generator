@@ -60,14 +60,14 @@ const AdmisionForm: React.FC = () => {
   return (
     <Container>
       <Box>
-        <Typography variant="h4" className="display-4 text-center mt-4 mb-5">
+        <Typography variant="h4" className="display-4 text-center mt-4 mb-5" sx={{ marginTop: 2, marginBottom: 2, fontWeight: 'bold' }}>
           Información relevante para Admisión
         </Typography>
       </Box>
 
       <Box>
         <div>
-          <Typography variant="h5">Información</Typography>
+          <Typography variant="h5" sx={{ marginTop: 2, marginBottom: 2, fontWeight: 'bold' }}>Información</Typography>
           <hr />
 
           <div>
@@ -84,8 +84,8 @@ const AdmisionForm: React.FC = () => {
               />
             </FormGroup>
 
-            <FormGroup>
-              <label htmlFor="adm_reqprog" className="form-label">
+            <FormGroup sx={{ marginTop: 2, marginBottom: 2, fontWeight: 'bold' }}>
+              <label htmlFor="adm_reqprog" className="form-label" >
                 Requisitos para el postulante o documentación solicitada
               </label>
 
@@ -141,7 +141,7 @@ const AdmisionForm: React.FC = () => {
         </div>
 
         <div>
-          <Typography variant="h5" className="titulo">
+          <Typography variant="h5" className="titulo" sx={{ marginTop: 2, marginBottom: 2, fontWeight: 'bold' }}>
             Cupos
           </Typography>
           <hr />

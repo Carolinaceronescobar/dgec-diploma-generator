@@ -4,17 +4,13 @@ import {
   Container,
   Typography,
   FormControl,
-  RadioGroup,
-  FormControlLabel,
-  Radio,
   MenuItem,
   Select,
-  TextField,
   Button,
   Box,
-  InputLabel,
   Divider,
   Input,
+  ButtonGroup,
 } from '@mui/material';
 
 // Define un componente funcional llamado FormularioDGEC.
@@ -77,31 +73,27 @@ const FormularioDGEC: React.FC = () => {
   // Renderiza el formulario con Material-UI.
   return (
     <Container>
-      <Typography variant="h4">Información relevante para DGEC</Typography>
+      <Typography variant="h4" sx={{ marginTop: 2, marginBottom: 2, fontWeight: 'bold' }}> Autorización</Typography>
 
       {/* Sección "Programa" */}
       <Box mt={3}>
-        <Typography variant="h6">Programa</Typography>
+        <Typography variant="h6"sx={{ marginTop: 2, marginBottom: 2, fontWeight: 'bold' }}>Programa</Typography>
         {/*Pregunta adicional*/}
-        <Typography variant="body1"> ¿Se ha dictado este programa académico en periodos anteriores? * </Typography>
-        <FormControl component="fieldset">
-          <RadioGroup
-            row
-            aria-label="haDictadoPrograma"
-            name="haDictadoPrograma"
-            value={haDictadoPrograma}
-            onChange={handleHaDictadoProgramaChange}
-          >
-            <FormControlLabel value="si" control={<Radio />} label="Sí" />
-            <FormControlLabel value="no" control={<Radio />} label="No" />
-          </RadioGroup>
-        </FormControl>
+        <Typography variant="body1" style={{ marginTop: '16px', marginBottom: '16px' }}> ¿Se ha dictado este programa académico en periodos anteriores? * </Typography >
+        <ButtonGroup
+            disableElevation
+            variant="contained"
+            aria-label="Disabled elevation buttons"
+>
+            <Button onClick={() => setHaDictadoPrograma('si')}>Si</Button>
+            <Button onClick={() => setHaDictadoPrograma('no')}>No</Button>
+        </ButtonGroup>
       </Box>
       
       {/* Pregunta adicional si la respuesta es "Sí" */}
       {haDictadoPrograma === 'si' && (
         <Box mt={3}>
-          <Typography variant="subtitle1">Seleccione el programa académico</Typography>
+          <Typography variant="subtitle1" style={{ marginTop: '16px', marginBottom: '16px' }}> Seleccione el programa académico</Typography>
           <FormControl fullWidth>
             <Select
               labelId="programa-academico-label"
@@ -118,13 +110,14 @@ const FormularioDGEC: React.FC = () => {
       )}
 
  {/* Línea divisoria entre secciones */}
- <Divider variant="middle" />
+ <Divider component="li" variant="inset" style={{ margin: '16px 0' }} />
+
 
       {/* Sección "Autorización" */}
       {/* Utiliza un componente Input y Button para crear un botón de carga de archivos personalizado */}
       <Box mt={2}>
-      <Typography variant="h6">Autorización</Typography>
-        <Typography variant="subtitle1">
+      <Typography variant="h6" style={{ marginTop: '16px', marginBottom: '16px', fontWeight: 'bold' }}> Autorización </Typography>
+        <Typography variant="subtitle1" style={{ marginTop: '16px', marginBottom: '16px' }}>
           Adjunte el memo de autorización de la DGEC para impartir el programa
         </Typography>
         <Input

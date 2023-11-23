@@ -5,11 +5,13 @@ import {
   TextField,
   Checkbox,
   FormControl,
-  Select,
   MenuItem,
   FormControlLabel,
   Button,
   Box,
+  Grid,
+  InputLabel,
+  Select,
 } from '@mui/material';
 import UsoInternoFinanzas from './UsoInterno/UsointernoFinanzasForm';
 
@@ -133,67 +135,49 @@ const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
   // Renderizado del componente
   return (
     <Container>
-      <Typography variant="h4" className="display-4 text-center mt-4 mb-5">
+      <Typography variant="h4" className="display-4 text-center mt-4 mb-5" sx={{ marginTop: 2, marginBottom: 2, fontWeight: 'bold' }}>
         Información relevante para Finanzas
       </Typography>
 
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
-        <TextField
-          fullWidth
-          id="regcur_durprog"
-          label="Valor de Arancel del programa *"
-          variant="outlined"
-          sx={{ mr: 2 }}
-        />
-        <TextField fullWidth id="regcur_verprog" label="Valor de Matrícula del programa *" variant="outlined" />
+      <Box>
+      <Typography variant="h6" sx={{ marginTop: 2, marginBottom: 2, fontWeight: 'bold' }}> Valorización</Typography>
       </Box>
-     
-{/* Otro bloque de campos */}
-<div className="form-check">
-          <FormControl fullWidth>
-            <Typography variant="subtitle1">Modalidad de Pago</Typography>
-            <Select id="regcur_sedeprog" label="Modalidad de Pago">
+      <Grid container spacing={2}>
+        <Grid item xs={5}>
+          <TextField
+            fullWidth
+            id="regcur_durprog"
+            label="Valor de Arancel del programa *"
+            variant="outlined"
+          />
+        </Grid>
+        <Grid item xs={5}>
+          <FormControl variant="outlined" fullWidth sx={{ mt: 0 }}>
+            <InputLabel id="modalidad-pago-label">Modalidad de Pago</InputLabel>
+            <Select
+              labelId="modalidad-pago-label"
+              id="regcur_sedeprog"
+              label="Modalidad de Pago"
+            >
               {/* Opciones de modalidad de pago */}
               <MenuItem value="Pago 1">Tarjeta de Débito</MenuItem>
               <MenuItem value="Pago 2">Tarjeta de Crédito</MenuItem>
               <MenuItem value="Pago 3">Transferencia</MenuItem>
             </Select>
           </FormControl>
-
-          {/* Campo de otros para la modalidad de pago */}
-          <div className="form-check">
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={formData.fin_modpagootros !== ''}
-                  onChange={handleCheckboxChange}
-                  name="fin_modpagootros"
-                />
-              }
-              label="Otros"
-            />
-            {formData.fin_modpagootros !== '' && (
-              <TextField
-                type="text"
-                className="form-control"
-                name="fin_modpagootros"
-                id="fin_modpagootros"
-                onChange={handleChange}
-              />
-            )}
-          </div>
-        </div>
+        </Grid>
+      </Grid>
       
 
       {/* Check  */}
 
-      <div className="form-row">
+      <div className="form-row" >
 
         {/* Nuevo bloque de campos */}
-        <div className="form-group col-md-6">
-          <p><label htmlFor="fin_valordescprog" className="form-label">
+        <div className="form-group  col-md-6"  >
+          <label htmlFor="fin_valordescprog" className="form-label"  >
             Descuentos que ofrece el programa (tipo y porcentaje asociado)
-          </label></p>
+          </label>
           <div className="form-row">
              {/* Nuevo bloque de campos para checkboxes adicionales */}
     <div className="form-row">
@@ -321,7 +305,7 @@ const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
       
 
       {/* Uso interno Finanzas */}
-      <Typography variant="h4" align="center" mt={4} mb={5}>
+      <Typography variant="h4" align="center" mt={4} mb={5}  >
         Uso Interno Finanzas
       </Typography>
       <UsoInternoFinanzas
