@@ -77,11 +77,7 @@ const HorizontalLinearStepper: React.FC = () => {
           const labelProps: {
             optional?: React.ReactNode;
           } = {};
-          if (isStepOptional(index)) {
-            labelProps.optional = (
-              <Typography variant="caption">Optional</Typography>
-            );
-          }
+          
           if (isStepSkipped(index)) {
             stepProps.completed = false;
           }
@@ -117,6 +113,7 @@ const HorizontalLinearStepper: React.FC = () => {
         </Button>
       </Box>
     </Box>
+    
   );
 };
 

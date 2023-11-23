@@ -1,111 +1,94 @@
-import React, { useState, useRef } from 'react';
-import TextField from '@mui/material/TextField';
-import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Button from '@mui/material/Button';
-import Grid from '@mui/material/Grid';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import {
+  Container,
+  Typography,
+  Table,
+  TableContainer,
+  TableHead,
+  TableRow,
+  TableCell,
+  TableBody,
+  Paper,
+  Button,
+} from '@mui/material';
 
-const DGECForm: React.FC = () => {
-  const [data, setData] = useState({
-    name: '',
-    age: '',
-    hasExperience: false,
-    autoFillData: '',
-    file: null as File | null,
-  });
+type Solicitud = {
+  id: number;
+  nombre: string;
+  departamento: string;
+  completada: boolean;
+};
 
-  const nameRef = useRef<HTMLInputElement | null>(null);
-  const ageRef = useRef<HTMLInputElement | null>(null);
-  const autoFillDataRef = useRef<HTMLInputElement | null>(null);
+const SolicitudesForm: React.FC = () => {
+  const [solicitudes, setSolicitudes] = useState<Solicitud[]>([]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setData({
-      ...data,
-      [e.target.name]: e.target.value,
-    });
-  };
+  useEffect(() => {
+    // Obtener las solicitudes desde el servidor al cargar el componente
+    axios.get('/api/solicitudes')
+      .then((response) => {
+        setSolicitudes(response.data);
+      })
+      .catch((error) => {
+        console.error('Error al obtener solicitudes:', error);
+      });
+  }, []); // Solo cargar las solicitudes al montar el componente
 
-  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setData({
-      ...data,
-      [e.target.name]: e.target.checked,
-    });
-  };
+  const handleChequearSolicitudes = () => {
+    // Marcar todas las solicitudes como completadas y actualizar en el servidor
+    const solicitudesCompletadas = solicitudes.map((solicitud) => ({
+      ...solicitud,
+      completada: true,
+    }));
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0] || null;
-    setData({
-      ...data,
-      file,
-    });
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Lógica para enviar los datos a la base de datos
-    console.log('Datos enviados:', data);
-    // Enfocar el siguiente campo
-    if (nameRef.current) nameRef.current.focus();
-    else if (ageRef.current) ageRef.current.focus();
-    else if (autoFillDataRef.current) autoFillDataRef.current.focus();
+    axios.put('/api/chequear-solicitudes', solicitudesCompletadas)
+      .then(() => {
+        setSolicitudes(solicitudesCompletadas);
+      })
+      .catch((error) => {
+        console.error('Error al chequear solicitudes:', error);
+      });
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Grid container spacing={2}>
-        <Grid item xs={12} md={6}>
-          <TextField
-            label="Nombre"
-            name="name"
-            value={data.name}
-            onChange={handleChange}
-            fullWidth
-            margin="normal"
-            inputRef={nameRef}
-          />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <TextField
-            label="Edad"
-            name="age"
-            value={data.age}
-            onChange={handleChange}
-            fullWidth
-            margin="normal"
-            inputRef={ageRef}
-          />
-        </Grid>
-      </Grid>
-      <FormControlLabel
-        control={
-          <Checkbox
-            checked={data.hasExperience}
-            onChange={handleCheckboxChange}
-            name="hasExperience"
-          />
-        }
-        label="¿Tiene experiencia?"
-      />
-      <TextField
-        label="Datos de autollenado"
-        name="autoFillData"
-        value={data.autoFillData}
-        onChange={handleChange}
-        fullWidth
-        margin="normal"
-        inputRef={autoFillDataRef}
-      />
-      <input
-        type="file"
-        accept=".pdf,.doc,.docx"
-        onChange={handleFileChange}
-      />
-      <Button type="submit" variant="contained" color="primary" fullWidth>
-        Enviar
-      </Button>
-    </form>
+    <Container>
+      <Typography variant="h4" align="center" mt={4} mb={5}>
+        Tabla de Solicitudes
+      </Typography>
+
+      <TableContainer component={Paper}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>ID</TableCell>
+              <TableCell>Nombre</TableCell>
+              <TableCell>Departamento</TableCell>
+              <TableCell>Completada</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {solicitudes.map((solicitud) => (
+              <TableRow key={solicitud.id}>
+                <TableCell>{solicitud.id}</TableCell>
+                <TableCell>{solicitud.nombre}</TableCell>
+                <TableCell>{solicitud.departamento}</TableCell>
+                <TableCell>{solicitud.completada ? 'Sí' : 'No'}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+
+      <div>
+        <Typography variant="h6" mt={4}>
+          Chequear todas las solicitudes:
+        </Typography>
+        <Button variant="contained" onClick={handleChequearSolicitudes}>
+          Chequear Solicitudes
+        </Button>
+      </div>
+    </Container>
   );
 };
 
-export default DGECForm;
-
+export default SolicitudesForm;

@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Container,
   Typography,
   Button,
   TextField,
   FormControl,
-  InputLabel,
   Select,
   MenuItem,
   RadioGroup,
@@ -16,7 +15,98 @@ import Box from '@mui/system/Box';
 import UsoInternoDGEC from './UsoInterno/UsointernoDGEC';
 import UsoInternoDireccionEstudios from './UsoInterno/UsointernoDireccionEstudios';
 
-const FormularioRegistroCurricular: React.FC = () => {
+const RegistroCurricularForm: React.FC = () => {
+  const [formularioPrincipalCompleto, setFormularioPrincipalCompleto] = useState<boolean>(false);
+  const [usoInternoDGEC, setUsoInternoDGEC] = React.useState({
+    campo1: '',
+    campo2: '',
+    // ... otros campos según sea necesario
+  });
+
+  const handleGuardarClick = () => {
+    // Lógica para guardar el formulario
+    console.log('Formulario guardado');
+    // Actualizar el estado para indicar que el formulario principal está completo
+    setFormularioPrincipalCompleto(true);
+  };
+
+  const [usoInternoDireccionEstudios, setUsoInternoDireccionEstudios] = React.useState({
+    campo1: '',
+    campo2: '',
+    // ... otros campos según sea necesario
+  });
+
+  const [departamentoDGEC, setDepartamentoDGEC] = React.useState('');
+  const [departamentoDireccionEstudios, setDepartamentoDireccionEstudios] = React.useState('');
+
+  const handleGuardarDGEC = async () => {
+    try {
+      // Aquí llamas a tu ruta de backend para guardar la información en DGEC
+      await fetch('/api/guardarDGEC', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ usoInternoDGEC }),
+      });
+
+      console.log('Guardado en DGEC:', usoInternoDGEC);
+    } catch (error) {
+      console.error('Error al guardar en DGEC:', error);
+    }
+  };
+
+  const handleEnviarDGEC = async () => {
+    try {
+      // Aquí llamas a tu ruta de backend para enviar la información a DGEC
+      await fetch('/api/enviarDGEC', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ usoInternoDGEC }),
+      });
+
+      console.log('Enviado a DGEC:', usoInternoDGEC);
+    } catch (error) {
+      console.error('Error al enviar a DGEC:', error);
+    }
+  };
+
+  const handleGuardarDireccionEstudios = async () => {
+    try {
+      // Aquí llamas a tu ruta de backend para guardar la información en Dirección de Estudios
+      await fetch('/api/guardarDireccionEstudios', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ usoInternoDireccionEstudios }),
+      });
+
+      console.log('Guardado en Dirección de Estudios:', usoInternoDireccionEstudios);
+    } catch (error) {
+      console.error('Error al guardar en Dirección de Estudios:', error);
+    }
+  };
+
+  const handleEnviarDireccionEstudios = async () => {
+    try {
+      // Aquí llamas a tu ruta de backend para enviar la información a Dirección de Estudios
+      await fetch('/api/enviarDireccionEstudios', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ usoInternoDireccionEstudios }),
+      });
+
+      console.log('Enviado a Dirección de Estudios:', usoInternoDireccionEstudios);
+    } catch (error) {
+      console.error('Error al enviar a Dirección de Estudios:', error);
+    }
+  };
+
   return (
     <Container>
       <Typography variant="h4" align="center" mt={4} mb={5}>
@@ -29,7 +119,7 @@ const FormularioRegistroCurricular: React.FC = () => {
         {/* sx={{ position: focused || selectedValue ? 'relative' : 'absolute', top: -2 }} */}
         <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
           <FormControl component="fieldset">
-            <InputLabel htmlFor="regcur_nivel">Nivel del Programa Académico *</InputLabel>
+          <Typography variant="subtitle1">Nivel de programa académico</Typography>
             <RadioGroup row id="regcur_nivel">
               <FormControlLabel
                 value="Curso"
@@ -47,7 +137,7 @@ const FormularioRegistroCurricular: React.FC = () => {
           </FormControl>
 
           <FormControl component="fieldset">
-            <InputLabel htmlFor="regcur_tipoprog">Tipo de Programa Académico *</InputLabel>
+          <Typography variant="subtitle1">Tipo de programa académico</Typography>
             <RadioGroup row id="regcur_tipoprog">
               <FormControlLabel
                 value="Cerrado (Corporativo)"
@@ -82,33 +172,33 @@ const FormularioRegistroCurricular: React.FC = () => {
 
           <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
             <FormControl fullWidth>
-              <InputLabel htmlFor="regcur_depprog">Departamento o Unidad *</InputLabel>
+            <Typography variant="subtitle1">Departamento o Unidad</Typography>
               <Select id="regcur_depprog" label="Departamento o Unidad">
-                <MenuItem value="Departamento de Electrónica">Departamento de Electrónica</MenuItem>
-                <MenuItem value="Departamento de Construcción y Prevención de Riesgos">
+                <MenuItem value="Dpto 1">Departamento de Electrónica</MenuItem>
+                <MenuItem value="Dpto 2">
                   Departamento de Construcción y Prevención de Riesgos
                 </MenuItem>
-                <MenuItem value="3">3</MenuItem>
-                <MenuItem value="4">4</MenuItem>
-                <MenuItem value="5">5</MenuItem>
+                <MenuItem value="Dpto 3">Departamento de Ingeniería</MenuItem>
+                <MenuItem value="Unidad 4">Unidad 4</MenuItem>
+                <MenuItem value="Unidad 5">Unidad 5</MenuItem>
               </Select>
             </FormControl>
 
             <FormControl fullWidth>
-              <InputLabel htmlFor="regcur_sedeprog">Emplazamiento *</InputLabel>
+            <Typography variant="subtitle1">Emplazamiento</Typography>
               <Select id="regcur_sedeprog" label="Emplazamiento">
-                <MenuItem value="Campus Casa Central Valparaíso">Campus Casa Central Valparaíso</MenuItem>
-                <MenuItem value="Campus San Joaquín">Campus San Joaquín</MenuItem>
-                <MenuItem value="Campus Vitacura">Campus Vitacura</MenuItem>
-                <MenuItem value="Sede Viña del Mar">Sede Viña del Mar</MenuItem>
-                <MenuItem value="Sede Concepción">Sede Concepción</MenuItem>
+                <MenuItem value="Campus 1">Campus Casa Central Valparaíso</MenuItem>
+                <MenuItem value="Campus 2">Campus San Joaquín</MenuItem>
+                <MenuItem value="Campus 3">Campus Vitacura</MenuItem>
+                <MenuItem value="Sede 1">Sede Viña del Mar</MenuItem>
+                <MenuItem value="Sede 2">Sede Concepción</MenuItem>
               </Select>
             </FormControl>
           </Box>
 
           <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
             <FormControl component="fieldset">
-              <InputLabel>Jornada *</InputLabel>
+            <Typography variant="subtitle1">Jornada</Typography>
               <RadioGroup row id="regcur_jorprog">
                 <FormControlLabel
                   value="Diurna"
@@ -138,7 +228,7 @@ const FormularioRegistroCurricular: React.FC = () => {
             </FormControl>
 
             <FormControl component="fieldset">
-              <InputLabel>Modalidad *</InputLabel>
+            <Typography variant="subtitle1">Modalidad</Typography>
               <RadioGroup row id="regcur_modprog">
                 <FormControlLabel
                   value="Presencial"
@@ -197,14 +287,30 @@ const FormularioRegistroCurricular: React.FC = () => {
       </Box>
 
       <Typography variant="h4" align="center" mt={4} mb={5}>
-        Información relevante para Registro Curricular
+        Uso Interno Dptos
       </Typography>
 
       {/* Componente para Uso interno DGEC */}
-      <UsoInternoDGEC />
+      <UsoInternoDGEC
+        campos={usoInternoDGEC}
+        setCampos={setUsoInternoDGEC}
+        departamento={departamentoDGEC}
+        setDepartamento={setDepartamentoDGEC}
+        readOnly={!formularioPrincipalCompleto || !!departamentoDGEC}
+        onGuardar={handleGuardarDGEC}
+        onEnviar={handleEnviarDGEC}
+      />
 
       {/* Componente para Uso interno Dirección de Estudios */}
-      <UsoInternoDireccionEstudios />
+      <UsoInternoDireccionEstudios
+        campos={usoInternoDireccionEstudios}
+        setCampos={setUsoInternoDireccionEstudios}
+        departamento={departamentoDireccionEstudios}
+        setDepartamento={setDepartamentoDireccionEstudios}
+        readOnly={!formularioPrincipalCompleto || !!departamentoDireccionEstudios}
+        onGuardar={handleGuardarDireccionEstudios}
+        onEnviar={handleEnviarDireccionEstudios}
+      />
 
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
         <Button variant="outlined" color="secondary" className="float-left">
@@ -217,4 +323,4 @@ const FormularioRegistroCurricular: React.FC = () => {
   );
 };
 
-export default FormularioRegistroCurricular;
+export default RegistroCurricularForm;
