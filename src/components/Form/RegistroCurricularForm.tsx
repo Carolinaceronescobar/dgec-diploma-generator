@@ -49,7 +49,7 @@ const RegistroCurricularForm: React.FC = () => {
     // ... otros campos según sea necesario
   });
 
-  const [value, setValue] = useState<dayjs.Dayjs | null>(dayjs('2022-04-17'));
+  const [value, setValue] = useState<dayjs.Dayjs | null>(dayjs('2023-11-28'));
 
 
   // Estado para departamentos
@@ -292,7 +292,7 @@ const RegistroCurricularForm: React.FC = () => {
         {/* Fechas de inicio y término */}
         <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={['DatePicker', 'DatePicker']}>
-        <DatePicker label="Fecha de Inicio" defaultValue={dayjs('2022-04-17')} />
+        <DatePicker label="Fecha de Inicio" defaultValue={dayjs('2023-11-28')} />
         <DatePicker
           label="Fecha de Finalización"
           value={value}
@@ -327,7 +327,7 @@ const RegistroCurricularForm: React.FC = () => {
         {/* Fechas de inicio y término */}
         <LocalizationProvider dateAdapter={AdapterDayjs}>
          <DemoContainer components={['DatePicker', 'DatePicker']}>
-          <DatePicker label="Fecha de Inicio" defaultValue={dayjs('2022-04-17')} />
+          <DatePicker label="Fecha de Inicio" defaultValue={dayjs('2023-11-28')} />
           <DatePicker
           label="Fecha de Finalización"
           value={value}
