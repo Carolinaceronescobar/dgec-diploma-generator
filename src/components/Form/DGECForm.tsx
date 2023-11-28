@@ -1,5 +1,5 @@
 // Importa React y los componentes de Material-UI que necesitas para construir tu formulario.
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Container,
   Typography,
@@ -12,6 +12,7 @@ import {
   Input,
   ButtonGroup,
 } from '@mui/material';
+import { obtenerProgramasDesdeBD } from '../../utils/api';
 
 // Define un componente funcional llamado FormularioDGEC.
 const FormularioDGEC: React.FC = () => {
@@ -19,6 +20,7 @@ const FormularioDGEC: React.FC = () => {
   const [haDictadoPrograma, setHaDictadoPrograma] = useState<string>('');
   const [programaSeleccionado, setProgramaSeleccionado] = useState<string>('');
   const [memoAdjunto, setMemoAdjunto] = useState<File | null>(null);
+  const [programas, setProgramas] = useState<string[]>([]);
 
   // Maneja cambios en la opción "Sí" o "No" para la pregunta "¿Se ha dictado este programa académico en periodos anteriores?"
   const handleHaDictadoProgramaChange = (
@@ -42,6 +44,16 @@ const FormularioDGEC: React.FC = () => {
     const file = event.target.files && event.target.files[0];
     setMemoAdjunto(file);
   };
+
+//Maneja la carga de programas desde la base de datos al montar el componente
+useEffect(() => {
+  const cargarProgramas =async () => {
+    const programasDesdeBD = await obtenerProgramasDesdeBD ();
+    setProgramas(programasDesdeBD);
+  };
+
+  cargarProgramas();
+}, []); //el segundo argumento [] asegura que esto solo se ejecute una vez al montar el componente
 
   // Maneja el clic en el botón "Guardar sin enviar".
   const handleGuardarClick = async () => {
@@ -85,8 +97,12 @@ const FormularioDGEC: React.FC = () => {
             variant="contained"
             aria-label="Disabled elevation buttons"
 >
-            <Button onClick={() => setHaDictadoPrograma('si')}>Si</Button>
-            <Button onClick={() => setHaDictadoPrograma('no')}>No</Button>
+            <Button onClick={() => setHaDictadoPrograma('si')}
+            style={{ backgroundColor: haDictadoPrograma === 'si' ? '#004B85' : 'inherit', color: haDictadoPrograma === 'si' ? 'white' : 'inherit'}}>
+              Si</Button>
+            <Button onClick={() => setHaDictadoPrograma('no')}
+            style={{ backgroundColor: haDictadoPrograma === 'no' ? '#004B85' : 'inherit', color: haDictadoPrograma === 'no' ? 'white' : 'inherit'}}>
+              No</Button>
         </ButtonGroup>
       </Box>
       
@@ -101,9 +117,11 @@ const FormularioDGEC: React.FC = () => {
               value= {programaSeleccionado}
               onChange = {handleProgramaSeleccionadoChange}
             >
-              <MenuItem value="programa1">Diploma de Ciberseguridad</MenuItem>
-              <MenuItem value="programa2">Curso de Gestión de Activos</MenuItem>
-              <MenuItem value="programa3">Curso Prueba 3</MenuItem>
+              {programas.map((programa) => (
+                <MenuItem key={programa} value={programa}>
+                  {programa}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
         </Box>
@@ -113,10 +131,11 @@ const FormularioDGEC: React.FC = () => {
  <Divider component="li" variant="inset" style={{ margin: '16px 0' }} />
 
 
-      {/* Sección "Autorización" */}
+      {/* Sección "Documento de Autorización" */}
       {/* Utiliza un componente Input y Button para crear un botón de carga de archivos personalizado */}
+      {haDictadoPrograma === 'no' && (
       <Box mt={2}>
-      <Typography variant="h6" style={{ marginTop: '16px', marginBottom: '16px', fontWeight: 'bold' }}> Autorización </Typography>
+      <Typography variant="h6" style={{ marginTop: '16px', marginBottom: '16px', fontWeight: 'bold' }}> Documento de Autorización </Typography>
         <Typography variant="subtitle1" style={{ marginTop: '16px', marginBottom: '16px' }}>
           Adjunte el memo de autorización de la DGEC para impartir el programa
         </Typography>
@@ -132,7 +151,7 @@ const FormularioDGEC: React.FC = () => {
             </Button>
           </label>
         </Box>
-
+      )}
       {/* Botón de "Guardar sin enviar" */}
       
       <Box mt={3}>

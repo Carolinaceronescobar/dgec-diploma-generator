@@ -1,0 +1,10 @@
+{
+    "usuarios": [
+      {
+        "userName": "usuarioPrueba",
+        "nombre": "Nombre de Prueba",
+        "correo": "prueba@example.com"
+      }
+    ]
+  }
+  

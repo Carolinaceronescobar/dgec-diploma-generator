@@ -83,7 +83,11 @@ const HorizontalLinearStepper: React.FC = () => {
           }
           return (
             <Step key={label} {...stepProps}>
-              <StepLabel {...labelProps}>{label}</StepLabel>
+              <StepLabel {...labelProps} sx={{
+                  color: activeStep === index ? '#004B85' : 'inherit',
+                  fontFamily: 'Roboto Condensed, sans-serif',
+                }} 
+                >{label}</StepLabel>
             </Step>
           );
         })}
@@ -98,18 +102,18 @@ const HorizontalLinearStepper: React.FC = () => {
           color="inherit"
           disabled={activeStep === 0}
           onClick={handleBack}
-          sx={{ mr: 1 }}
+          sx={{ mr: 1, color: '#004B85'}}
         >
-          Back
+          Atrás
         </Button>
         <Box sx={{ flex: '1 1 auto' }} />
         {isStepOptional(activeStep) && (
-          <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
+          <Button color="inherit" onClick={handleSkip} sx={{ mr: 1, color: '#004B85' }}>
             Skip
           </Button>
         )}
-        <Button onClick={handleNext}>
-          {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+        <Button onClick={handleNext} sx={{ color: '#004B85' }}> 
+          {activeStep === steps.length - 1 ? 'Finalizar' : 'Siguiente'}
         </Button>
       </Box>
     </Box>

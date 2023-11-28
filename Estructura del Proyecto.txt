@@ -1,43 +1,46 @@
-my-form-app/
-|-- node_modules/
-|-- public/
-|   |-- vite-env.d.ts
-|   |-- vite.svg
-|-- src/
-|   |-- assets/
-|   |   |-- react.svg
-|   |   |-- version-horizontal.png
-|   |-- components/
-|   |   |-- css/
-|   |   |   |-- DGECForm.module.css
-|   |   |-- Form/
-|   |   |   |-- AdmisionForm.tsx
-|   |   |   |-- DGECForm.tsx
-|   |   |   |-- FinanzasForm.tsx
-|   |   |   |-- RegistroCurricularForm.tsx
-|   |   |-- UsoInterno/
-|   |   |   |-- UsointernoDGECForm.tsx
-|   |   |   |-- UsointernoDireccionEstudios.tsx
-|   |   |   |-- UsointernoFinanzasForm.tsx
-|   |   |-- HorizontalLinearStepper.tsx
-|   |   |-- SolicitudesForm.tsx
-|   |   |-- TopBar.tsx
-|   |-- App.tsx
-|   |-- App.css
-|   |-- main.tsx
-|-- server/
-|   |-- src/
-|   |   |-- server.ts
-|   |   |-- routes/
-|   |   |   |-- admisionRoutes.ts
-|   |   |   |-- registroCurricularRoutes.ts
-|   |   |   |-- finanzasRoutes.ts
-|-- .eslintrc.cjs
-|-- .gitignore
-|-- index.html
-|-- package-lock.json
-|-- package.json
-|-- README.md
-|-- tsconfig.json
-|-- tsconfig.node.json
-|-- vite.config.ts
+|-- my-form-app/
+    |-- node_modules/
+    |-- public/
+    |   |-- vite-env.d.ts
+    |   |-- vite.svg
+    |-- src/
+    |   |-- assets/
+    |   |   |-- react.svg
+    |   |   |-- version-horizontal.png
+    |   |-- components/
+    |   |   |-- css/
+    |   |   |   |-- DGECForm.module.css
+    |   |   |-- Form/
+    |   |   |   |-- AdmisionForm.tsx
+    |   |   |   |-- DGECForm.tsx
+    |   |   |   |-- FinanzasForm.tsx
+    |   |   |   |-- RegistroCurricularForm.tsx
+    |   |   |-- UsoInterno/
+    |   |   |   |-- UsointernoDGECForm.tsx
+    |   |   |   |-- UsointernoDireccionEstudios.tsx
+    |   |   |   |-- UsointernoFinanzasForm.tsx
+    |   |   |-- HorizontalLinearStepper.tsx
+    |   |   |-- SolicitudesForm.tsx
+    |   |   |-- TopBar.tsx
+    |   |-- utils/   // Nueva carpeta para utilidades
+    |   |   |-- api.ts   // Archivo api.ts aquí
+    |   |-- App.tsx
+    |   |-- App.css
+    |   |-- main.tsx
+    |-- server/
+    |   |-- src/
+    |   |   |-- server.ts
+    |   |   |-- routes/
+    |   |   |   |-- admisionRoutes.ts
+    |   |   |   |-- registroCurricularRoutes.ts
+    |   |   |   |-- finanzasRoutes.ts
+    |-- .eslintrc.cjs
+    |-- .gitignore
+    |-- index.html
+    |-- package-lock.json
+    |-- package.json
+    |-- README.md
+    |-- tsconfig.json
+    |-- tsconfig.node.json
+    |-- vite.config.ts
+
