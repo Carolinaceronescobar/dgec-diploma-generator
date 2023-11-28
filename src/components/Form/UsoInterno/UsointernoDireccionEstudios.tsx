@@ -24,7 +24,7 @@ const UsointernoDireccionEstudios: React.FC<UsoInternoDGECProps> = ({
 }) => {
   return (
     <Box>
-      <Typography variant="h5" sx={{ marginTop: 2, marginBottom: 2, fontWeight: 'bold' }}> Uso interno Dirección de Estudios</Typography>
+      <Typography variant="h6" sx={{ marginTop: 2, marginBottom: 2, fontWeight: 'bold' }}> Uso interno Dirección de Estudios</Typography>
       <hr />
 
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>

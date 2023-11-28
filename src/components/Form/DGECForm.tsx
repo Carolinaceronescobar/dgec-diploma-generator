@@ -85,7 +85,7 @@ useEffect(() => {
   // Renderiza el formulario con Material-UI.
   return (
     <Container>
-      <Typography variant="h4" sx={{ marginTop: 2, marginBottom: 2, fontWeight: 'bold' }}> Autorización</Typography>
+      <Typography variant="h5" sx={{ marginTop: 2, marginBottom: 2, fontWeight: 'bold' }}> Autorización</Typography>
 
       {/* Sección "Programa" */}
       <Box mt={3}>
