@@ -3,7 +3,7 @@
 import React from 'react';
 import { Typography, TextField, FormControl, Select, MenuItem, Button, Box } from '@mui/material';
 
-interface UsoInternoDGECProps {
+interface UsoInternoDireccionEstudiosProps {
   campos: { campo1: string; campo2: string }; // Ajusta según sea necesario
   setCampos: React.Dispatch<React.SetStateAction<{ campo1: string; campo2: string }>>;
   departamento: string;
@@ -11,32 +11,37 @@ interface UsoInternoDGECProps {
   readOnly: boolean;
   onGuardar: () => void;
   onEnviar: () => void;
+  mostrar: boolean;
+  onMostrarToggle:() => void;
 }
 
-const UsointernoDireccionEstudios: React.FC<UsoInternoDGECProps> = ({
-  campos,
+const UsointernoDireccionEstudios: React.FC<UsoInternoDireccionEstudiosProps> = ({
+  campos: 
   setCampos,
   departamento,
   setDepartamento,
   readOnly,
   onGuardar,
   onEnviar,
+  mostrar,
+  onMostrarToggle
 }) => {
   return (
-    <Box>
+    <Box style={{ display: mostrar ? 'block' : 'none'}}>
       <Typography variant="h6" sx={{ marginTop: 2, marginBottom: 2, fontWeight: 'bold' }}> Uso interno Dirección de Estudios</Typography>
       <hr />
 
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
-        <TextField
-          fullWidth
+        <FormControl fullWidth> 
+        <Select
           label="INTERNO - Código del Programa (SIGA)"
-          value={campos.campo1}
-          onChange={(e) => setCampos((prevCampos) => ({ ...prevCampos, campo1: e.target.value }))}
-          variant="outlined"
-          InputProps={{ readOnly: readOnly }}
-          sx={{ mr: 2 }}
-        />
+          value={departamento}
+          onChange={(e) => setDepartamento(e.target.value as string)}
+          disabled={readOnly}
+          >
+            
+          </Select>
+          </FormControl>
       </Box>
 
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
@@ -47,9 +52,9 @@ const UsointernoDireccionEstudios: React.FC<UsoInternoDGECProps> = ({
             onChange={(e) => setDepartamento(e.target.value as string)}
             disabled={readOnly}
           >
-            <MenuItem value="Tiempo1">2024- 1</MenuItem>
-            <MenuItem value="Tiempo2">2023- 2</MenuItem>
-            <MenuItem value="Tiempo3">2023- 1</MenuItem>
+            <MenuItem key="Tiempo1">2024- 1</MenuItem>
+            <MenuItem key="Tiempo2">2023- 2</MenuItem>
+            <MenuItem key="Tiempo3">2023- 1</MenuItem>
           </Select>
         </FormControl>
       </Box>

@@ -1,4 +1,4 @@
-// Importa React y los componentes de Material-UI que necesitas para construir tu formulario.
+// Se importa React y los componentes de Material-UI que necesito para construir el formulario.
 import React, { useState, useEffect } from 'react';
 import {
   Container,

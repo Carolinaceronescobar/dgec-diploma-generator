@@ -79,6 +79,7 @@ const handleSubmit = async () => {
 
 // Maneja el clic en el botón "Guardar sin enviar".
 const handleGuardarClick = async () => {
+  
   try {
     // Realiza una solicitud POST a un endpoint de tu servidor con los datos del formulario.
     const response = await fetch('/api/guardarFormulario', {
@@ -349,7 +350,17 @@ const handleGuardarClick = async () => {
       </div>
     </Box>
 </Container>
-);
-};
+  );
+  } catch (e: Error) {
+  console.log('error handleGuardarClick ', e);
+  return (
+    <p> error </p>
+  );
+  }
+}
 
-export default AdmisionForm;
+ return <p> hola</p>
+
+}
+
+export default AdmisionForm

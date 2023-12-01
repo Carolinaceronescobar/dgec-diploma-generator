@@ -10,13 +10,13 @@
     |   |-- components/
     |   |   |-- css/
     |   |   |   |-- DGECForm.module.css
-    |   |   |-- Form/
+    |   |   |-- Form/ 
     |   |   |   |-- AdmisionForm.tsx
     |   |   |   |-- DGECForm.tsx
     |   |   |   |-- FinanzasForm.tsx
     |   |   |   |-- RegistroCurricularForm.tsx
         |   |   |-- SolicitudesForm.tsx
-    |   |   |   |-- UsoInterno/
+    |   |   |   |-- UsoInterno/ 
     |   |   |   |  |-- UsointernoDGECForm.tsx
     |   |   |   |  |-- UsointernoDireccionEstudios.tsx
     |   |   |   |  |-- UsointernoFinanzasForm.tsx

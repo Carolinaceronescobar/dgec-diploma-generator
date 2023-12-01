@@ -38,6 +38,28 @@ export const obtenerProgramasDesdeBD = async (): Promise<string[]> => {
     });
 }
 
+interface ProgramType 
+{
+        id: string;
+        nombre: string;
+        descripcion: string;   
+}
+
+//obtener programa por id o nombre
+export const obtenerdetalleProgramasporID = async (id: string): Promise<ProgramType> => {
+  // Simulación de una llamada a la base de datos
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      // Datos ficticios de programas
+      const programa = {
+        id: "1",
+        nombre: "Diploma de Ciberseguridad",
+        descripcion: "lorem itldmg  j h j kjh jkhjhbjhjbjh jh j jh j j jh ",  
+      }
+      resolve(programa);
+    }, 1000); // Simular un tiempo de espera de 1 segundo
+  });
+}
     // Función para obtener información del usuario desde la base de datos
     export const obtenerInformacionUsuario = async (userName: string): Promise<any> => {
       try {
