@@ -21,29 +21,38 @@ import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 
+
+
 // Componente principal
 const RegistroCurricularForm: React.FC = () => {
+  {
   // Estado para el formulario principal
-  const [formularioPrincipalCompleto, setFormularioPrincipalCompleto] = useState<boolean>(false);
+  const [FormularioPrincipalCompleto, setFormularioPrincipalCompleto] = useState<boolean>(false);
+  
+  //Estado para mostrar Uso Interno DGEC y Dirección de Estudios
+  const [mostrarUsoInternoDGEC, setMostrarUsoInternoDGEC] = useState<boolean>(false);
+  const [mostrarUsoInternoDireccionEstudios, setMostrarUsoInternoDireccionEstudios] = useState<boolean>(false);
 
+  //En el componente principal
+  // En tu componente principal
+  const handleMostrarUsoInternoDGEC = () => {
+    setMostrarUsoInternoDGEC(!mostrarUsoInternoDGEC);
+    };
+  const handleMostrarUsoInternoDireccionEstudios = () => {
+      setMostrarUsoInternoDireccionEstudios(!mostrarUsoInternoDireccionEstudios);
+    };
   // Estado para campos de Uso Interno DGEC
-  const [usoInternoDGEC, setUsoInternoDGEC] = React.useState({
-    campo1: '',
-    campo2: '',
+  const [UsoInternoDGEC, setUsoInternoDGEC] = React.useState({
+    campo1: any,
+    campo2: any,
     // ... otros campos según sea necesario
   });
-
-  {/* Manejador de clic en el botón de guardar*/}
-
-  const handleGuardarClick = () => {
-    // Lógica para guardar el formulario
-    console.log('Formulario guardado');
     // Actualizar el estado para indicar que el formulario principal está completo
     setFormularioPrincipalCompleto(true);
   };
 
   // Estado y manejadores para Uso Interno Dirección de Estudios
-  const [usoInternoDireccionEstudios, setUsoInternoDireccionEstudios] = React.useState({
+  const [UsoInternoDireccionEstudios, setUsoInternoDireccionEstudios] = React.useState({
     campo1: '',
     campo2: '',
     // ... otros campos según sea necesario
@@ -55,6 +64,17 @@ const RegistroCurricularForm: React.FC = () => {
   // Estado para departamentos
   const [departamentoDGEC, setDepartamentoDGEC] = React.useState('');
   const [departamentoDireccionEstudios, setDepartamentoDireccionEstudios] = React.useState('');
+  
+//Estado para el formulario principal
+  const [FormularioPrincipalCompleto, setFormularioPrincipalCompleto] = useState<boolean>(false);
+
+  //Actualizar el EstadoFormulario principal para indicar que esta completo
+  const handleFormularioCompleto = () => {
+    // Puedes hacer aquí cualquier lógica necesaria antes de marcar el formulario como completo
+    setFormularioPrincipalCompleto(true);
+  };
+
+  
 
   // Manejadores de clic para DGEC
   const handleGuardarDGEC = async () => {
@@ -65,10 +85,10 @@ const RegistroCurricularForm: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ usoInternoDGEC }),
+        body: JSON.stringify({ UsoInternoDGEC }),
       });
 
-      console.log('Guardado en DGEC:', usoInternoDGEC);
+      console.log('Guardado en DGEC:', UsoInternoDGEC);
     } catch (error) {
       console.error('Error al guardar en DGEC:', error);
     }
@@ -82,10 +102,10 @@ const RegistroCurricularForm: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ usoInternoDGEC }),
+        body: JSON.stringify({ UsoInternoDGEC }),
       });
 
-      console.log('Enviado a DGEC:', usoInternoDGEC);
+      console.log('Enviado a DGEC:', UsoInternoDGEC);
     } catch (error) {
       console.error('Error al enviar a DGEC:', error);
     }
@@ -100,10 +120,10 @@ const RegistroCurricularForm: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ usoInternoDireccionEstudios }),
+        body: JSON.stringify({ UsoInternoDireccionEstudios }),
       });
 
-      console.log('Guardado en Dirección de Estudios:', usoInternoDireccionEstudios);
+      console.log('Guardado en Dirección de Estudios:', UsoInternoDireccionEstudios);
     } catch (error) {
       console.error('Error al guardar en Dirección de Estudios:', error);
     }
@@ -117,12 +137,38 @@ const RegistroCurricularForm: React.FC = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ usoInternoDireccionEstudios }),
+        body: JSON.stringify({ UsoInternoDireccionEstudios }),
       });
 
-      console.log('Enviado a Dirección de Estudios:', usoInternoDireccionEstudios);
+      console.log('Enviado a Dirección de Estudios:', UsoInternoDireccionEstudios);
     } catch (error) {
       console.error('Error al enviar a Dirección de Estudios:', error);
+    }
+  };
+
+  // Maneja el clic en el botón "Guardar sin enviar".
+  const handleGuardarClick = async () => {
+    try {
+      // Realiza una solicitud POST a un endpoint de tu servidor con los datos del formulario.
+      const response = await fetch('/api/guardarFormulario', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          handleGuardarDGEC,
+          handleEnviarDireccionEstudios,
+          handleGuardarDireccionEstudios,
+          handleEnviarDGEC,
+          UsoInternoDGEC,
+          UsoInternoDireccionEstudios,
+        }),
+      });
+    // Lógica para guardar el formulario
+        console.log('Formulario guardado', response);
+    // Lógica para el error al guardar formulario
+    } catch (error: any) {
+      console.error('Error al guardar el formulario', error.message || error);
     }
   };
 
@@ -320,6 +366,7 @@ const RegistroCurricularForm: React.FC = () => {
         </Box>
       </Box>
 
+       {/*Sección Fecha Convocatoria*/}
       <Box>
         <Typography variant="h6" sx={{ marginTop: 2, marginBottom: 2, fontWeight: 'bold' }}>Fecha Convocatoria</Typography>
         <hr />
@@ -344,30 +391,54 @@ const RegistroCurricularForm: React.FC = () => {
       </Typography>
 
       {/* Componente para Uso interno DGEC */}
-      <UsoInternoDGEC
-        campos={usoInternoDGEC}
-        setCampos={setUsoInternoDGEC}
-        departamento={departamentoDGEC}
-        setDepartamento={setDepartamentoDGEC}
-        readOnly={!formularioPrincipalCompleto || !!departamentoDGEC}
-        onGuardar={handleGuardarDGEC}
-        onEnviar={handleEnviarDGEC}
-        />
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
+      <Button variant="outlined" color="primary" className="float-left" onClick={handleMostrarUsoInternoDGEC}>
+        Mostrar/Ocultar Uso Interno DGEC
+      </Button>
+        
+          {/*Mostrar/Ocultar Uso Interno DGEC*/}
+        
+          <Button variant="outlined" color="primary" className="float-left" onClick={handleMostrarUsoInternoDireccionEstudios}>
+        Mostrar/Ocultar Uso Interno Direccion Estudios
+      </Button>
+      
+      {/*Mostrar/Ocultar Uso Interno Dirección de Estudios*/}
+      </Box>
 
-                {/* Componente para Uso interno Dirección de Estudios */}
-      <UsoInternoDireccionEstudios
-      campos={usoInternoDireccionEstudios}
-      setCampos={setUsoInternoDireccionEstudios}
-      departamento={departamentoDireccionEstudios}
-      setDepartamento={setDepartamentoDireccionEstudios}
-      readOnly={!formularioPrincipalCompleto || !!departamentoDireccionEstudios}
-      onGuardar={handleGuardarDireccionEstudios}
-      onEnviar={handleEnviarDireccionEstudios}
-    />
+      {/* Secciones de Uso Interno */}
+      {mostrarUsoInternoDGEC && (
+        <UsoInternoDGEC
+          campos={UsoInternoDGEC}
+          setCampos={setUsoInternoDGEC}
+          departamento={departamentoDGEC}
+          setDepartamento={setDepartamentoDGEC}
+          readOnly={!FormularioPrincipalCompleto || !!departamentoDGEC}
+          onGuardar={handleGuardarDGEC}
+          onEnviar={handleEnviarDGEC}
+        />
+      )}
+
+      {mostrarUsoInternoDireccionEstudios && (
+        <UsoInternoDireccionEstudios
+          campos={UsoInternoDireccionEstudios}
+          setCampos={setUsoInternoDireccionEstudios}
+          departamento={departamentoDireccionEstudios}
+          setDepartamento={setDepartamentoDireccionEstudios}
+          readOnly={!FormularioPrincipalCompleto || !!departamentoDireccionEstudios}
+          onGuardar={handleGuardarDireccionEstudios}
+          onEnviar={handleEnviarDireccionEstudios}
+          mostrar={mostrarUsoInternoDireccionEstudios}
+          onMostrarToggle={handleMostrarUsoInternoDireccionEstudios}
+        />
+      )}
+    {/* Botón para marcar el formulario como completo */}
+<Button variant="outlined" color="primary" className="float-left" onClick={handleFormularioCompleto}>
+        Marcar como completo
+      </Button>
 
     {/* Botón para guardar sin enviar */}
     <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
-      <Button variant="outlined" color="secondary" className="float-left">
+      <Button variant="outlined" color="primary" className="float-left" onClick={handleGuardarClick}>
         Guardar sin enviar
       </Button>
     </Box>

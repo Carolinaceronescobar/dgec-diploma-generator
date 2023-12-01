@@ -11,8 +11,8 @@ import {
   Stack,
 } from '@mui/material';
 import Box from '@mui/system/Box';
-import axios from 'axios';
 import { Input, Container } from '@mui/material';
+import { guardarFormulario } from '../../utils/api';
 
 // Definición del componente funcional AdmisionForm
 const AdmisionForm: React.FC = () => {
@@ -28,6 +28,8 @@ const AdmisionForm: React.FC = () => {
     vacprog: '',
     matrminprog: '',
     linkedin: '',  // Agregamos la propiedad linkedin al estado
+    modulos: '',
+    staffProfesores: '',
   });
 
   // Estado local para almacenar la foto adjunta
@@ -64,8 +66,8 @@ const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 // Función para manejar el envío del formulario
 const handleSubmit = async () => {
   try {
-    // Enviar datos al servidor Node.js mediante una solicitud POST
-    const response = await axios.post('URL_DEL_SERVIDOR/api/admision', formData);
+    // Enviar datos al servidor mediante la funcion guardarFormulario
+    const response = await guardarFormulario(formData);
 
     // Lidiar con la respuesta del servidor (puedes mostrar un mensaje de éxito, por ejemplo)
     console.log('Respuesta del servidor:', response.data);
@@ -95,7 +97,6 @@ const handleGuardarClick = async () => {
 
   // Renderización del componente
   return (
-    <div>
     <Container>
       <Box>
         {/* Sección: Información General del Programa */}
@@ -129,6 +130,7 @@ const handleGuardarClick = async () => {
       </Box>
 
       {/* Sección: Objetivo del Programa */}
+      <Box>
       <div>
         <Typography variant="h6" sx={{ marginTop: 2, marginBottom: 2, fontWeight: 'bold' }}>Objetivo del Programa</Typography>
         <hr />
@@ -148,9 +150,10 @@ const handleGuardarClick = async () => {
           </FormGroup>
         </div>
       </div>
-
+     </Box>
 
       {/* Sección: Reseña del Director */}
+     <Box>
       <div>
         <Typography variant="h6" sx={{ marginTop: 2, marginBottom: 2, fontWeight: 'bold' }}>Reseña del Director</Typography>
         <hr />
@@ -170,7 +173,7 @@ const handleGuardarClick = async () => {
           </FormGroup>
         </div>
       </div>
-    
+    </Box>
     
     <Box>
         <Stack direction="row" spacing={2}>
@@ -289,7 +292,8 @@ const handleGuardarClick = async () => {
         </div>
       
 {/* Sección: Módulos del Programa */}
-<div>
+  <Box>
+    <div>
         <Typography variant="h6" sx={{ marginTop: 2, marginBottom: 2, fontWeight: 'bold' }}> Liste Módulos del Programa</Typography>
         <hr />
 
@@ -308,9 +312,11 @@ const handleGuardarClick = async () => {
           </FormGroup>
         </div>
       </div>
+    </Box>
 
 {/* Sección: Staff de Profesores */}
-<div>
+    <Box>
+      <div>
         <Typography variant="h6" sx={{ marginTop: 2, marginBottom: 2, fontWeight: 'bold' }}>Liste el Staff de Profesores</Typography>
         <hr />
 
@@ -329,20 +335,20 @@ const handleGuardarClick = async () => {
           </FormGroup>
         </div>
       </div>
+    </Box>
 
       {/* Sección: Botón de Guardar */}
       <Box>
       <div className="row">
         <div className="col-6">
           {/* Botón para guardar el formulario */}
-          <Button variant="outlined" color="secondary" className="float-left" onClick={handleGuardarClick}> sx={{ marginTop: 2}}>
+          <Button variant="outlined" color="secondary" className="float-left" onClick={handleGuardarClick} sx={{ marginTop: 2}}>
             Guardar sin enviar
           </Button>
         </div>
       </div>
     </Box>
 </Container>
-</div>
 );
 };
 

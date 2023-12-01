@@ -3,7 +3,7 @@
 import React from 'react';
 import { Typography, TextField, FormControl, Select, MenuItem, Button, Box } from '@mui/material';
 
-interface UsoInternoDGECProps {
+interface UsointernoDGECProps {
   campos: { campo1: string; campo2: string }; // Ajusta según sea necesario
   setCampos: React.Dispatch<React.SetStateAction<{ campo1: string; campo2: string }>>;
   departamento: string;
@@ -13,7 +13,7 @@ interface UsoInternoDGECProps {
   onEnviar: () => void;
 }
 
-const UsoInternoDGEC: React.FC<UsoInternoDGECProps> = ({
+const UsoInternoDGEC: React.FC<UsointernoDGECProps> = ({
   campos,
   setCampos,
   departamento,

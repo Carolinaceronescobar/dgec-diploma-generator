@@ -1,4 +1,30 @@
 // api.ts
+import axios from 'axios';
+
+//Establece la URL base de la API
+const baseURL = 'http://localhost:5000/api'; // se ajusta URL según la configuración del servidor
+
+//se crea una instancia de axios con la URL base
+const api = axios.create({
+  baseURL,
+})
+
+//Se exporta la instacia de axios para su uso en otros lugares de la aplicación
+export default api;
+
+//Función para realizar una solicitud POST al endpint de guardarFormulario
+export const guardarFormulario = async (FormData: any) => {
+  try {
+    //Realiza una solicitud POST a la nueva ruta del formulario
+    const response = await api.post('/formulario/guardarFormulario',FormData);
+
+    //Retorna la respuesta del servidor
+    return response.data;
+  } catch (error) {
+      console.error('Error al enviar el formulario', error);
+      throw error;
+    }
+  };
 
 // Función simulada para obtener programas desde la base de datos
 export const obtenerProgramasDesdeBD = async (): Promise<string[]> => {

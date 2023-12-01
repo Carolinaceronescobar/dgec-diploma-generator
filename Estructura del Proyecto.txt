@@ -15,18 +15,20 @@
     |   |   |   |-- DGECForm.tsx
     |   |   |   |-- FinanzasForm.tsx
     |   |   |   |-- RegistroCurricularForm.tsx
-    |   |   |-- UsoInterno/
-    |   |   |   |-- UsointernoDGECForm.tsx
-    |   |   |   |-- UsointernoDireccionEstudios.tsx
-    |   |   |   |-- UsointernoFinanzasForm.tsx
+        |   |   |-- SolicitudesForm.tsx
+    |   |   |   |-- UsoInterno/
+    |   |   |   |  |-- UsointernoDGECForm.tsx
+    |   |   |   |  |-- UsointernoDireccionEstudios.tsx
+    |   |   |   |  |-- UsointernoFinanzasForm.tsx
     |   |   |-- HorizontalLinearStepper.tsx
-    |   |   |-- SolicitudesForm.tsx
+    |   |   |-- Footer.tsx
     |   |   |-- TopBar.tsx
     |   |-- utils/   // Nueva carpeta para utilidades
     |   |   |-- api.ts   // Archivo api.ts aquí
     |   |-- App.tsx
     |   |-- App.css
     |   |-- main.tsx
+    |   |-- Routes.tsx
     |-- server/
     |   |-- src/
     |   |   |-- server.ts
@@ -36,6 +38,7 @@
     |   |   |   |-- finanzasRoutes.ts
     |-- .eslintrc.cjs
     |-- .gitignore
+    |-- db.json
     |-- index.html
     |-- package-lock.json
     |-- package.json
