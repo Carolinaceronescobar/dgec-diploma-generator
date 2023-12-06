@@ -61,7 +61,18 @@ const RegistroCurricularForm: React.FC = () => {
   const [selectedDepartamento, setSelectedDepartamento] = useState<number | string>('');
   const [departamentoDireccionEstudios, setDepartamentoDireccionEstudios] =useState([]);
   
+function departamentoDump(){
+const depto = [
+  { "id": 1, "name": "departamento Nombre1" },
+  { "id": 2, "name": "departamento Nombre2" },
+  { "id": 3, "name": "departamento Nombre3" }
+]
+
+setDepartamentoDGEC(depto);
+}
+
   useEffect(() => {
+    departamentoDump();
     // Realizar la solicitud al backend para obtener los datos de los departamentos
     fetch('../../utils/api/departamentos')  // Reemplaza 'departamentos' con la ruta correcta a tu endpoint de departamentos
       .then(response => response.json())
@@ -74,8 +85,17 @@ const RegistroCurricularForm: React.FC = () => {
 
   // Estado para sedes
   const [sedes, setSedes] = useState<Sedes[]> ([]);
-
+  
+  function sedesDump(){
+    const sedes = [
+      { "id": 1, "name": "sede Nombre1" },
+      { "id": 2, "name": "sede Nombre2" },
+      { "id": 3, "name": "sede Nombre3" }
+    ]
+    setSedes(sedes);
+    }
   useEffect(() => {
+    sedesDump();
     // Realiza una solicitud al backend para obtener los datos de las sedes
     fetch('../../utils/api/sedes')  // Reemplaza 'sedes' con la ruta correcta a tu endpoint de sedes
       .then(response => response.json())

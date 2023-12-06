@@ -1,41 +1,23 @@
-// En un nuevo archivo AuthContext.tsx
-import React, { createContext, useContext, ReactNode } from 'react';
+// auth/AuthContext.tsx
 
-type AuthContextType = {
-  user: string | null;
-  role: string | null;
-  login: (username: string, role: string) => void;
-  logout: () => void;
-};
+import React from 'react';
+import { createContext, useContext, ReactNode } from 'react';
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
+interface AuthContextProps {
+  token: string | null;
+  setToken: (token: string | null) => void;
+}
 
-type AuthProviderProps = {
-  children: ReactNode;
-};
+const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
-export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-  const [user, setUser] = React.useState<string | null>(null);
-  const [role, setRole] = React.useState<string | null>(null);
+export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [token, setToken] = React.useState<string | null>(null);
 
-  const login = (username: string, role: string) => {
-    setUser(username);
-    setRole(role);
-  };
-
-  const logout = () => {
-    setUser(null);
-    setRole(null);
-  };
-
-  const contextValue: AuthContextType = {
-    user,
-    role,
-    login,
-    logout,
-  };
-
-  return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ token, setToken }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export const useAuth = () => {

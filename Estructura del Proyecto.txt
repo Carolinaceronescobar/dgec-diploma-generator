@@ -1,4 +1,9 @@
-|-- my-form-app/
+|-- DGEC-DIPLOMA-GENERATOR/
+    |-- backend
+    |   |-- node_modules/
+    |   |-- index.js/
+    |   |-- package-lock.json/
+    |   |-- package.json/
     |-- node_modules/
     |-- public/
     |   |-- vite-env.d.ts
@@ -7,6 +12,10 @@
     |   |-- assets/
     |   |   |-- react.svg
     |   |   |-- version-horizontal.png
+    |   |-- auth/
+    |   |   |-- AuthContext.tsx
+    |   |   |-- PrivateRoute.tsx
+    |   |   |-- RegistroPage.tsx
     |   |-- components/
     |   |   |-- css/
     |   |   |   |-- DGECForm.module.css
@@ -14,6 +23,7 @@
     |   |   |   |-- AdmisionForm.tsx
     |   |   |   |-- DGECForm.tsx
     |   |   |   |-- FinanzasForm.tsx
+    |   |   |   |-- LoginPage.tsx
     |   |   |   |-- RegistroCurricularForm.tsx
         |   |   |-- SolicitudesForm.tsx
     |   |   |   |-- UsoInterno/ 
@@ -22,11 +32,14 @@
     |   |   |   |  |-- UsointernoFinanzasForm.tsx
     |   |   |-- HorizontalLinearStepper.tsx
     |   |   |-- Footer.tsx
+    |   |   |-- LoginForm.tsx
     |   |   |-- TopBar.tsx
     |   |-- utils/   // Nueva carpeta para utilidades
-    |   |   |-- api.ts   // Archivo api.ts aquí
+    |   |   |-- api.ts   
+    |   |   |-- AuthContext.ts 
     |   |-- App.tsx
     |   |-- App.css
+    |   |-- Formulario.tsx
     |   |-- main.tsx
     |   |-- Routes.tsx
     |-- server/
@@ -36,6 +49,7 @@
     |   |   |   |-- admisionRoutes.ts
     |   |   |   |-- registroCurricularRoutes.ts
     |   |   |   |-- finanzasRoutes.ts
+    |   |   |   |-- FormularioRoutes.ts
     |-- .eslintrc.cjs
     |-- .gitignore
     |-- db.json

@@ -150,6 +150,12 @@ useEffect(() => {
               Adjuntar archivo
             </Button>
           </label>
+
+          
+      {/* Límite de archivo */}
+      <Typography variant="body2" mt={2}>
+        Límite de archivo: 5 MB
+      </Typography>
         </Box>
       )}
       {/* Botón de "Guardar sin enviar" */}
@@ -160,10 +166,6 @@ useEffect(() => {
         </Button>
       </Box>
 
-      {/* Límite de archivo */}
-      <Typography variant="body2" mt={2}>
-        Límite de archivo: 5 MB
-      </Typography>
     </Container>
   );
 };

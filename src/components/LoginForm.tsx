@@ -3,21 +3,27 @@ import React, { useState } from 'react';
 import { Button, TextField, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../auth/AuthContext';
+import { login } from '../utils/api';
 
 type LoginFormProps = {
   onLogin: (username: string, password: string) => void;
 };
 
-const LoginForm: React.FC<LoginFormProps> = ({ onLogin }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+const LoginForm: React.FC = () => {
+    const [username, setUsername] = useState('Usuario ');
+    const [password, setPassword] = useState('');
+    const { setToken } = useAuth();
 
-
-   const history = useNavigate();
-  const handleLogin = () => {
-    // Aquí podrías realizar la lógica de autenticación y llamar a onLogin
-    onLogin(username, password);
-    history('/Formulario');
+  const history = useNavigate();
+  
+  const handleLogin = async () => {
+    try {
+      const response = await login(username, password);
+      setToken(response.token);
+    } catch (error) {
+      console.error('Login failed', error);
+    }
   };
 
 

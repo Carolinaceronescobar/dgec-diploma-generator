@@ -1,6 +1,24 @@
 // api.ts
 import axios from 'axios';
 
+const API_BASE_URL = 'http://localhost:5001';
+
+export const login = async (username: string, password: string): Promise<{ token: string }> => {
+  const response = await fetch(`${API_BASE_URL}/login`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ username, password }),
+  });
+
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(error.error);
+  }
+
+  return response.json();
+};
 //Establece la URL base de la API
 const baseURL = 'http://localhost:5000/api'; // se ajusta URL según la configuración del servidor
 

@@ -4,7 +4,7 @@ import TopBar from './components/TopBar';
 import HorizontalLinearStepper from './components/HorizontalLinearStepper';
 import Footer from './components/Footer'; // Importa el componente Footer
 import './App.css'; // Ruta correcta al archivo de estilo CSS
-import AppRoutes from './Routes';
+// import AppRoutes from './Routes';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './auth/AuthContext';
 import LoginPage from './components/Form/LoginPage';

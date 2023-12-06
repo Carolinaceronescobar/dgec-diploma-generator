@@ -7,28 +7,56 @@ import { PrivateRoute } from './auth/PrivateRoute';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './auth/AuthContext';
 
-const App = () => {
-    const FormularioCompleto = () => {
-    };
-
- return (
-  <Router>
-    <AuthProvider>
-      <Routes>
-      <PrivateRoute path="/formulario-creacion-programa" roles={['usuarioDirector']}>
-          <div>
-            <TopBar />
-            <div className="container">
-              <h1>Solicitud Creación de Programa</h1>
-              <HorizontalLinearStepper />
-            </div>
-            <Footer />
-          </div>
-        </PrivateRoute>
-        {/* Otras rutas */}
-      </Routes>
-    </AuthProvider>
-  </Router>
-);
- }
+ const App = () => {
+  return (
+    <div>
+      <TopBar />
+      <div className="container">
+   <h1>Solicitud Creación de Programa</h1>
+   <HorizontalLinearStepper />
+ </div>
+      <Footer />
+    </div>
+  );
+}
 export default App;
+
+// const App = () => {
+//     const FormularioCompleto = () => {
+//     };
+
+//     // return (
+//     //         <PrivateRoute path="/formulario-creacion-programa" roles={['usuarioDirector']}>
+//     //             <div>
+//     //               <TopBar />
+//     //               <div className="container">
+//     //                 <h1>Solicitud Creación de Programa</h1>
+//     //                 <HorizontalLinearStepper />
+//     //               </div>
+//     //               <Footer />
+//     //             </div>
+//     //           </PrivateRoute>
+             
+//     //   );
+
+//     return (
+//         <Router>
+//           <AuthProvider>
+//             <Routes>
+//             <PrivateRoute path="/formulario-creacion-programa" roles={['usuarioDirector']}>
+//                 <div>
+//                   <TopBar />
+//                   <div className="container">
+//                     <h1>Solicitud Creación de Programa</h1>
+//                     <HorizontalLinearStepper />
+//                   </div>
+//                   <Footer />
+//                 </div>
+//               </PrivateRoute>
+//               {/* Otras rutas */}
+//             </Routes>
+//           </AuthProvider>
+//         </Router>
+//       );
+//  }
+// export default App;

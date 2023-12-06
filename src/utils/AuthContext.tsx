@@ -21,11 +21,15 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [role, setRole] = React.useState<string | null>(null);
 
   const login = (username: string, role: string) => {
+    console.log('login')
+
     setUser(username);
     setRole(role);
   };
 
    const logout = () => {
+    console.log('soy logout')
+
     setUser(null);
     setRole(null);
   };
@@ -41,6 +45,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 };
 
 export const useAuth = () => {
+    console.log('soy un useAuth')
   const context = useContext(AuthContext);
   if (!context) {
     throw new Error('useAuth must be used within an AuthProvider');

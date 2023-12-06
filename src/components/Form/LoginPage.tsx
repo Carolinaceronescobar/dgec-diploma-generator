@@ -12,6 +12,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { useNavigate } from 'react-router-dom';
+// import { UserRole, onLogin } from './types'
 
 function Copyright(props: any) {
   return (
@@ -29,14 +31,112 @@ function Copyright(props: any) {
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
-export default function LoginPage() {
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        const email = data.get('email');
-        const password = data.get('password');
+const LoginPage = () => {
+    const navigate = useNavigate();
+
+const authenticateUser = (email: string): void => {
+    console.log('perfil', email);
+
+ // Simplificando la lógica de autenticación
+    // En este ejemplo, solo se verifica si el correo electrónico es uno de los roles predefinidos
+
+    switch(email){
+        case "director@domain.com":
+        case "angeles.ceron.e@gmail.com":
+            navigate('./Formulario');
+            break;  
+            // llenar con otros correos:
+            // 
+            default: 
+            navigate('./Formulario');
+             console.log('Error de autenticacion');
+    }         
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const email = data.get('email') as string;
+
+    authenticateUser(email);
+  
+  };
+  
+//let UserRole ={}
+//export default function LoginPage() {
+    
+        //const password = data.get('password') as string;
         
-      
+
+// preguntar que formato enviar el password
+//preguntar como es el objeto que se va a enviar {psw:..,usr} {contrasenia:..,usuario}
+       // try { 
+       //     const urllogin= '';
+       //     // VComunica con el server
+       //   const response = await fetch(urllogin , {
+       //     method: 'POST',
+       //     headers: {
+       //       'Content-Type': 'application/json',
+       //     },
+       //     body: JSON.stringify({ email, password }),
+       //   });
+      //
+       //   if (response.ok) {
+       //     const responseData = await response.json();
+       //     console.log('Respuesta del backend:', responseData);
+       // //Respuesta servidor ok (autorizo a entrear)
+       //    response.data en teoria debe traer el usuario y su perfil
+    //    email-> va el perfil
+       
+
+       //     // Aquí puedes manejar la respuesta del backend, como redirigir al usuario a otra página
+       //   } else {
+       //     // Aca esta mal alignProperty, alerta de email y/o passwrd
+       //     console.error('Error al enviar el formulario al backend');
+       //   }
+       // } catch (error) {
+       //   console.error('Error:', error);
+       //}
+// if (userRole) {
+//     //Usuario autenticado, llamar a onLogin y redirigir segun el rol
+//     onLogin(email, userRole);
+//     redirectBasedOnUserRole(userRole);
+// } else {
+//     //no se autenticó correctamente
+//     console.error('Error de autenticacion');
+// }
+//    };
+
+    
+    
+        
+        // Aquí implementa tu lógica de autenticación, por ejemplo, consultar a un servidor o comparar en memoria
+        // Devuelve el rol del usuario si se autentica correctamente, o null si falla la autenticación
+
+
+   
+    
+    //   const redirectBasedOnUserRole = (userRole: UserRole) => {
+    //     let history = useNavigate();
+    //     // Redirigir según el rol del usuario
+    //     switch (userRole) {
+    //       case 'usuarioDirector':
+    //         history('/Formulario');
+    //         break;
+    //       case 'usuarioDGEC':
+    //         history('/UsoInterno/UsointernoDGEC');
+    //         break;
+    //       case 'usuarioFinanzas':
+    //         history('/UsoInterno/UsointernoFinanzasForm');
+    //         break;
+    //       case 'usuarioDireccionEstudios':
+    //         history('/UsoInterno/UsointernoDireccionEstudios');
+    //         break;
+    //       default:
+    //         console.error('Rol de usuario no válido');
+    //     }
+    //   };
+
       //  try { 
         //     const urllogin= '';
         //   const response = await fetch(urllogin , {
@@ -57,7 +157,7 @@ export default function LoginPage() {
         // } catch (error) {
         //   console.error('Error:', error);
        // }
-      };
+ 
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -128,8 +228,9 @@ export default function LoginPage() {
       </Container>
     </ThemeProvider>
   );
-}
+};
 
+export default LoginPage;
 // type LoginPageProps = {
 //     // onLogin: (username: string, password: string) => void;
 //     onLogin: () => void;
