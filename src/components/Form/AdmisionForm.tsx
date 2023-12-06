@@ -11,7 +11,8 @@ import {
   Stack,
 } from '@mui/material';
 import Box from '@mui/system/Box';
-import { Input, Container } from '@mui/material';
+import Input from '@mui/material/Input';
+import Container from '@mui/material/Container';
 import { guardarFormulario } from '../../utils/api';
 
 // Definición del componente funcional AdmisionForm
@@ -27,7 +28,7 @@ const AdmisionForm: React.FC = () => {
     },
     vacprog: '',
     matrminprog: '',
-    linkedin: '',  // Agregamos la propiedad linkedin al estado
+    linkedin: '',
     modulos: '',
     staffProfesores: '',
   });
@@ -36,23 +37,26 @@ const AdmisionForm: React.FC = () => {
   const [FotoAdjunta, setFotoAdjunta] = useState<File | null>(null);
 
  // Función para manejar cambios en los campos de texto
- const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  const { name, value } = event.target;
-  setFormData({
-    ...formData,
-    [name]: value,
-  });
-};
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
 // Función para manejar cambios en la selección de la foto adjunta
-const handleFotoAdjuntaChange = (
-  event: React.ChangeEvent<HTMLInputElement>
-) => {
-  const file = event.target.files && event.target.files[0];
-  setFotoAdjunta(file);
-};
+  const handleFotoAdjuntaChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const file = event.target.files && event.target.files[0];
+    setFotoAdjunta(file);
+  };
 
 // Función para manejar cambios en los campos de checkbox
-const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+const handleCheckboxChange = (
+  event: React.ChangeEvent<HTMLInputElement>
+) => {
   const { name, checked } = event.target;
   setFormData({
     ...formData,
@@ -66,35 +70,31 @@ const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 // Función para manejar el envío del formulario
 const handleSubmit = async () => {
   try {
-    // Enviar datos al servidor mediante la funcion guardarFormulario
     const response = await guardarFormulario(formData);
-
-    // Lidiar con la respuesta del servidor (puedes mostrar un mensaje de éxito, por ejemplo)
     console.log('Respuesta del servidor:', response.data);
   } catch (error: any) {
-    // Lidiar con errores (mostrar el mensaje de error si está definido)
     console.error('Error al enviar el formulario:', error.message || error);
   }
 };
 
 // Maneja el clic en el botón "Guardar sin enviar".
 const handleGuardarClick = async () => {
-  
   try {
-    // Realiza una solicitud POST a un endpoint de tu servidor con los datos del formulario.
     const response = await fetch('/api/guardarFormulario', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        handleChange,
-        handleFotoAdjuntaChange,
-        handleCheckboxChange,
-        handleGuardarClick
-        ,
+        formData,
+        FotoAdjunta,
       }),
     });
+    console.log('Formulario guardado correctamente');
+  } catch (e) {
+    console.error('Error al guardar el formulario:', e);
+  }
+};
 
   // Renderización del componente
   return (
@@ -351,16 +351,6 @@ const handleGuardarClick = async () => {
     </Box>
 </Container>
   );
-  } catch (e: Error) {
-  console.log('error handleGuardarClick ', e);
-  return (
-    <p> error </p>
-  );
-  }
-}
-
- return <p> hola</p>
-
-}
+};
 
 export default AdmisionForm

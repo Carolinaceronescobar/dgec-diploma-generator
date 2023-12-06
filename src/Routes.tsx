@@ -1,13 +1,16 @@
 // src/Routes.tsx
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './auth/Login';
+import LoginPage from './components/Form/LoginPage';
+import { PrivateRoute } from './auth/PrivateRoute';
+import MyComponent from './App.tsx';
 
 const AppRoutes: React.FC = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<LoginPage/>} />
+        <PrivateRoute path="/form" roles={['role1','role2']} element={<MyComponent/>} />
       </Routes>
     </Router>
   );
