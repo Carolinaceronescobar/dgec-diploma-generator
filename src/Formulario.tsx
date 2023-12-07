@@ -6,14 +6,18 @@ import './App.css'; // Ruta correcta al archivo de estilo CSS
 import { PrivateRoute } from './auth/PrivateRoute';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './auth/AuthContext';
+import SolicitudesTabla from './dashboard/SolicitudesForm';
+
 
  const App = () => {
+  const solicitudesData = obtenerSolicitudes(); // Por ejemplo, una función para obtener las solicitudes
   return (
     <div>
       <TopBar />
       <div className="container">
    <h1>Solicitud Creación de Programa</h1>
    <HorizontalLinearStepper />
+   <SolicitudesTabla solicitudes={solicitudesData} />
  </div>
       <Footer />
     </div>

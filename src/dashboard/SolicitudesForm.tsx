@@ -23,9 +23,12 @@ type Solicitud = {
 
 type SolicitudesTablaProps = {
   solicitudes: Solicitud[];
+  datos: any[];
 };
 
+
 const SolicitudesTabla: React.FC<SolicitudesTablaProps> = ({ solicitudes }) => {
+
   return (
     <TableContainer component={Paper}>
       <Table>

@@ -2,6 +2,7 @@
 import React from 'react';
 import { Typography, TextField, FormControl, RadioGroup, FormControlLabel, Radio, Button, Box } from '@mui/material';
 
+
 interface UsointernoFinanzasProps {
   campos: {
     fin_valoraraprog: string;
@@ -44,7 +45,7 @@ const UsoInternoFinanzas: React.FC<UsointernoFinanzasProps> = ({
   readOnly,
   onGuardar,
   onEnviar,
-}) => {
+}) => { 
   return (
     <Box>
       <Typography variant="h5" sx={{ marginTop: 2, marginBottom: 2, fontWeight: 'bold' }}>Uso interno Finanzas</Typography>

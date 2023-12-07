@@ -35,21 +35,22 @@ const FinanzasForm: React.FC = () => {
   const [formularioPrincipalCompleto, setFormularioPrincipalCompleto] = useState<boolean>(false);
 
   // Estado para almacenar los datos del formulario
-const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState({
   // Utilizar el tipo definido para fin_valordescprog
-  fin_valordescprog: {
-    fin_valordescprog_asd: { checked: false, porcentaje: 0 },
-    fin_valordescprog_2: { checked: false, porcentaje: 0 },
-    fin_valordescprog_3: { checked: false, porcentaje: 0 },
-    fin_valordescprog_4: { checked: false, porcentaje: 0 },
-    fin_valordescprog_5: { checked: false, porcentaje: 0 },
-    fin_valordescprog_6: { checked: false, porcentaje: 0 },
-  } as FinValordescprog,
-  fin_valordescprog_otro: '', // Campo para descuentos "Otro"
-  fin_modpagoprog: '', // Modalidad de Pago del programa
-  fin_modpagocuotas: '', // Cuotas de pago
-  fin_modpagootros: '', // Otros detalles de la modalidad de pago
-  fin_modpagomedios: [] as string[], // Medios de pago seleccionados
+      fin_valordescprog: {
+        fin_valordescprog_asd: { checked: false, porcentaje: 0 },
+        fin_valordescprog_2: { checked: false, porcentaje: 0 },
+        fin_valordescprog_3: { checked: false, porcentaje: 0 },
+        fin_valordescprog_4: { checked: false, porcentaje: 0 },
+        fin_valordescprog_5: { checked: false, porcentaje: 0 },
+        fin_valordescprog_6: { checked: false, porcentaje: 0 },
+      } as FinValordescprog,
+      fin_valordescprog_otro: '', // Campo para descuentos "Otro"
+      fin_modpagoprog: '', // Modalidad de Pago del programa
+      fin_modpagocuotas: '', // Cuotas de pago
+      fin_modpagootros: '', // Otros detalles de la modalidad de pago
+      fin_modpagomedios: [] as string[], // Medios de pago seleccionados
+      
   // Campos adicionales para descuentos específicos
   exAlumnosUSM: false,
   exAlumnosUSMText: '',
@@ -60,6 +61,7 @@ const [formData, setFormData] = useState({
   otros: false,
   otrosText: '',
 });
+
   // Manejador para cambios en los campos de entrada
 const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
   const { name, value } = event.target;
@@ -132,6 +134,36 @@ const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     }
   };
 
+  // Maneja el clic en el botón "Guardar sin enviar".
+  const handleGuardarClick = async () => {
+    try {
+      // Realiza una solicitud POST a un endpoint de tu servidor con los datos del formulario.
+      const response = await fetch('/api/guardarFormulario', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          formData,
+          handleCheckboxChange,
+          handleEnviarFinanzas,
+          handleGuardarClick,
+          handlePorcentajeChange,
+          handleSubmit,
+        }),
+      });
+   
+      // Verifica si la solicitud fue exitosa y muestra mensajes en la consola.
+      if (response.ok) {
+        console.log('Formulario guardado exitosamente');
+      } else {
+        console.error('Error al guardar el formulario');
+      }
+    } catch (error) {
+      console.error('Error al enviar la solicitud:', error);
+    }
+  };
+  
   // Renderizado del componente
   return (
     <Container>
@@ -168,24 +200,15 @@ const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         </Grid>
       </Grid>
       
-
-      {/* Check  */}
-
-      <div className="form-row" >
-
         {/* Nuevo bloque de campos */}
         <div className="form-group  col-md-6"  >
           <label htmlFor="fin_valordescprog" className="form-label"  >
             Descuentos que ofrece el programa (tipo y porcentaje asociado)
           </label>
           <div className="form-row">
-             {/* Nuevo bloque de campos para checkboxes adicionales */}
-    <div className="form-row">
-      <div className="form-group col-md-6">
-
-        <div className="form-row">
+        </div>
           {/* Checkbox y campo de texto para Ex alumnos USM */}
-          <div className="form-check">
+          <div className="form-check col-md-4">
             <FormControlLabel
               control={
                 <Checkbox
@@ -194,99 +217,106 @@ const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
                   name="exAlumnosUSM"
                 />
               }
-              label="Ex alumnos USM"
-            />
+          label="Ex alumnos USM"
+         />
+        </div>
 
-          </div>
+  {/* Checkbox y campo de texto para Mujeres */}
+  <div className="form-check col-md-4">
+    <FormControlLabel
+      control={
+        <Checkbox
+          checked={formData.mujeres}
+          onChange={handleCheckboxChange}
+          name="mujeres"
+        />
+      }
+      label="Mujeres"
+    />
+  </div>
 
-          {/* Checkbox y campo de texto para Mujeres */}
-          <div className="form-check">
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={formData.mujeres}
-                  onChange={handleCheckboxChange}
-                  name="mujeres"
-                />
-              }
-              label="Mujeres"
-            />
-          </div>
+  {/* Checkbox y campo de texto para Funcionarios USM */}
+  <div className="form-check col-md-4">
+    <FormControlLabel
+      control={
+        <Checkbox
+          checked={formData.funcionariosUSM}
+          onChange={handleCheckboxChange}
+          name="funcionariosUSM"
+        />
+      }
+      label="Funcionarios USM"
+    />
+  </div>
 
-          {/* Checkbox y campo de texto para Funcionarios USM */}
-          <div className="form-check">
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={formData.funcionariosUSM}
-                  onChange={handleCheckboxChange}
-                  name="funcionariosUSM"
-                />
-              }
-              label="Funcionarios USM"
-            />
-           </div>
+  {/* Checkbox y campo de texto para Funcionarios de servicios públicos */}
+  <div className="form-check col-md-4">
+    <FormControlLabel
+      control={
+        <Checkbox
+          checked={formData.funcionariosServiciosPublicos}
+          onChange={handleCheckboxChange}
+          name="funcionariosServiciosPublicos"
+        />
+      }
+      label="Funcionarios Servicios Publicos"
+    />
+  </div>
 
-          {/* Checkbox y campo de texto para Funcionarios de servicios públicos */}
-         <div className="form-check">
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={formData.funcionariosServiciosPublicos}
-                  onChange={handleCheckboxChange}
-                  name="funcionariosServiciosPublicos"
-                />
-              }
-              label="Funcionarios Servicios Publicos"
-            />
-            
-          </div>
-          
-          {/* Checkbox y campo de texto para Matrícula anticipada */}
-         <div className="form-check">
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={formData.matriculaAnticipada}
-                  onChange={handleCheckboxChange}
-                  name="MatriculaAnticipada"
-                />
-              }
-              label="Matricula anticipada"
-            />
-            </div>
-          
-          {/* Checkbox y campo de texto para Otro */}
-          <div className="form-check">
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={formData.otros}
-                  onChange={handleCheckboxChange}
-                  name="otros"
-                />
-              }
-              label="Otro"
-            />
-            {formData.otros && (
-              <TextField
-                type="text"
-                className="form-control"
-                name="otrosText"
-                id="otrosText"
-                onChange={handleChange}
-              />
-            )}
-          </div>
+  {/* Checkbox y campo de texto para Matrícula anticipada */}
+  <div className="form-check col-md-4">
+    <FormControlLabel
+      control={
+        <Checkbox
+          checked={formData.matriculaAnticipada}
+          onChange={handleCheckboxChange}
+          name="matriculaAnticipada"
+        />
+      }
+      label="Matricula anticipada"
+    />
+  </div>
+
+  {/* Checkbox y campo de texto para Otro */}
+  <div className="form-check col-md-4">
+    <FormControlLabel
+      control={
+        <Checkbox
+          checked={formData.otros}
+          onChange={handleCheckboxChange}
+          name="otros"
+        />
+      }
+      label="Otro"
+    />
+    {formData.otros && (
+      <div className="form-row">
+        <div className="form-group col-md-6">
+          <TextField
+            type="text"
+            className="form-control"
+            name="otrosText"
+            id="otrosText"
+            label="Otro descuento"
+            onChange={handleChange}
+          />
+        </div>
+        <div className="form-group col-md-6">
+          <TextField
+            type="number"
+            className="form-control"
+            name="otrosPorcentaje"
+            id="otrosPorcentaje"
+            label="Porcentaje"
+            InputProps={{ inputProps: { min: 0, max: 100 } }}
+            onChange={handlePorcentajeChange}
+          />
         </div>
       </div>
+    )}
     </div>
-
-          </div>
-        </div>
-
-        
-
+  </div>
+    
       {/* Botón para guardar sin enviar */}
       <div className="row mb-10">
         <div className="col-12">
@@ -300,21 +330,20 @@ const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
           </Button>
         </div>
       </div>
-      </div>
       {/* Campos adicionales fuera del bloque anterior */}
       
 
       {/* Uso interno Finanzas */}
-      <Typography variant="h4" align="center" mt={4} mb={5}  >
+      {/* <Typography variant="h4" align="center" mt={4} mb={5}  >
         Uso Interno Finanzas
-      </Typography>
-      <UsoInternoFinanzas
+      </Typography> */}
+      {/* <UsoInternoFinanzas
         campos={formData}
         setCampos={setFormData}
         readOnly={!formularioPrincipalCompleto}
         onGuardar={handleGuardarFinanzas}
         onEnviar={handleEnviarFinanzas}
-      />
+      /> */}
 
       {/* Botón adicional para guardar sin enviar */}
       <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>

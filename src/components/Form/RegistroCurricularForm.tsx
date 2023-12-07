@@ -109,12 +109,12 @@ setDepartamentoDGEC(depto);
     };
 
   // En tu componente principal
-  const handleMostrarUsoInternoDGEC = () => {
-  setMostrarUsoInternoDGEC(!mostrarUsoInternoDGEC);
-  };
-  const handleMostrarUsoInternoDireccionEstudios = () => {
-    setMostrarUsoInternoDireccionEstudios(!mostrarUsoInternoDireccionEstudios);
-  };
+  // const handleMostrarUsoInternoDGEC = () => {
+  // setMostrarUsoInternoDGEC(!mostrarUsoInternoDGEC);
+  // };
+  // const handleMostrarUsoInternoDireccionEstudios = () => {
+  //   setMostrarUsoInternoDireccionEstudios(!mostrarUsoInternoDireccionEstudios);
+  // };
 
 //Manejo de clic para DGEC
   const handleGuardarDGEC = async () => {
@@ -395,27 +395,27 @@ setDepartamentoDGEC(depto);
 
 
       {/* Sección: Uso Interno Departamentos */}
-      <Typography variant="h6" align="center" mt={4} mb={5} sx={{ marginTop: 10, marginBottom: 2, fontWeight: 'bold' }}>
+      {/* <Typography variant="h6" align="center" mt={4} mb={5} sx={{ marginTop: 10, marginBottom: 2, fontWeight: 'bold' }}>
         USO INTERNO DEPARTAMENTOS
-      </Typography>
+      </Typography> */}
 
       {/* Componente para Uso interno DGEC */}
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
+      {/* <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
       <Button variant="outlined" color="primary" className="float-left" onClick={handleMostrarUsoInternoDGEC}>
         Mostrar/Ocultar Uso Interno DGEC
-      </Button>
+      </Button> */}
         
           {/*Mostrar/Ocultar Uso Interno DGEC*/}
         
-          <Button variant="outlined" color="primary" className="float-left" onClick={handleMostrarUsoInternoDireccionEstudios}>
+          {/* <Button variant="outlined" color="primary" className="float-left" onClick={handleMostrarUsoInternoDireccionEstudios}>
         Mostrar/Ocultar Uso Interno Direccion Estudios
       </Button>
-      
+       */}
       {/*Mostrar/Ocultar Uso Interno Dirección de Estudios*/}
-      </Box>
+      {/* </Box> */}
 
       {/* Secciones de Uso Interno */}
-      <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
+      {/* <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>
         <Button variant="outlined" color="primary" className="float-left" onClick={handleMostrarUsoInternoDGEC}>
           Mostrar/Ocultar Uso Interno DGEC
         </Button>
@@ -428,12 +428,12 @@ setDepartamentoDGEC(depto);
         >
           Mostrar/Ocultar Uso Interno Direccion Estudios
         </Button>
-      </Box>
+      </Box> */}
       
     {/* Botón para marcar el formulario como completo */}
-<Button variant="outlined" color="primary" className="float-left" onClick={handleFormularioCompleto}>
+{/* <Button variant="outlined" color="primary" className="float-left" onClick={handleFormularioCompleto}>
         Marcar como completo
-      </Button>
+      </Button> */}
 
     {/* Botón para guardar sin enviar */}
     <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 2 }}>

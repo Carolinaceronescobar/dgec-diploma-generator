@@ -9,7 +9,7 @@ import DGECForm from './Form/DGECForm';
 import RegistroCurricularForm from './Form/RegistroCurricularForm';
 import AdmisionForm from './Form/AdmisionForm';
 import FinanzasForm from './Form/FinanzasForm';
-import SolicitudesForm from './Form/SolicitudesForm';
+import SolicitudesForm from '../dashboard/SolicitudesForm';
 
 const steps = [
   'Autorización',
@@ -18,14 +18,20 @@ const steps = [
   'Finanzas',
   'Solicitudes',
 ];
-
+interface SolicitudesTablaProps {
+  datos: /*tipo de datos*/;
+}
 const forms = [
   <DGECForm />,
   <RegistroCurricularForm />,
   <AdmisionForm />,
   <FinanzasForm />,
-  <SolicitudesForm solicitudes={[]} />,
+  <SolicitudesForm datos ={"..."} />,
 ];
+
+interface SolicitudesTablaProps {
+  datos?: /*Tipo de datos*/;
+}
 
 const HorizontalLinearStepper: React.FC = () => {
   const [activeStep, setActiveStep] = React.useState(0);

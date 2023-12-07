@@ -62,8 +62,7 @@ const TopBar: React.FC = () => {
 return (
   <AppBar position="static" style={{ backgroundColor: '#004B85' }}>
     <Toolbar style={{ display: 'flex', justifyContent: 'space-between' }}>
-      
-    <div style={{ display: 'flex', alignItems: 'center' }}>
+     <div style={{ display: 'flex', alignItems: 'center' }}>
       {/*Logotipo de la Universidad */}
       <Avatar
   alt="logo"
@@ -74,7 +73,6 @@ return (
     marginRight: 50,
   }} />
 
-
       {/*Mostrar información del usuario si esta disponible */}
       {usuario && (
         <div style={{ marginLeft: 20, color: 'white'}}>
@@ -83,6 +81,7 @@ return (
           {usuario.nombre}
           </Button>
           {/*Se puede añadir otras propiedades al usuario*/}
+      
       {/* Menú desplegable */}
       <Menu
       id="simple-menu"
@@ -95,11 +94,12 @@ return (
     </Menu>
   </div>
 )}
-</div>     
+</div> 
+
       {/* Mostrar opciones según el perfil de usuario */}
-      {usuario && usuario.perfil === 'usuario1' && (
-          <Button color="inherit" href="./main.tsx" style={{ fontFamily: 'Roboto Condensed', color: 'white' }}>
-            Formulario Usuario 1
+      {usuario && (
+          <Button color="inherit" href="./Formulario.tsx" style={{ fontFamily: 'Roboto Condensed', color: 'white' }}>
+            Formulario Director Programa
           </Button>
         )}
         {usuario && usuario.perfil === 'usuario2' && (

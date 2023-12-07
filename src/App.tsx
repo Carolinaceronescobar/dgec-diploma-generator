@@ -9,41 +9,27 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from './auth/AuthContext';
 import LoginPage from './components/Form/LoginPage';
 import { PrivateRoute } from './auth/PrivateRoute';
-import Formulario from './Formulario'
+import Dashboard from './dashboard/Dashboard';
+import UsoInternoFinanzas from './components/Form/UsoInterno/UsointernoFinanzasForm';
+import UsoInternoDGEC from './components/Form/UsoInterno/UsointernoDGEC';
+import UsointernoDireccionEstudios from './components/Form/UsoInterno/UsointernoDireccionEstudios';
 
 const App = () => {
   const handleLogin = () => {
   };
     return (
       <Router>
+        <AuthProvider>
         <Routes>
           <Route path="/" element={<LoginPage />} />
-          <Route path="/formulario" element={<Formulario />} />
-           </Routes>
+          <Route path="/formulario" element={<Dashboard/>} />
+          <Route path="/finanzas" element={<UsoInternoFinanzas />} />
+          <Route path="/Dgec" element={<UsoInternoDGEC />} />
+          <Route path="/DireccionEstudios" element={<UsointernoDireccionEstudios/>} /> 
+       </Routes>
+       </AuthProvider>   
       </Router>
     );
   };
 
-//  return (
-//   <Router>
-//     <AuthProvider>
-//       <Routes>
-//       <Route path="/login" element={<LoginPage />} />
-//         <Route path="/register" element={<RegistroPage />} />
-//            <PrivateRoute path="/formulario-creacion-programa" roles={['usuarioDirector']}>
-//           <div>
-//             <TopBar />
-//             <div className="container">
-//               <h1>Solicitud Creación de Programa</h1>
-//               <HorizontalLinearStepper />
-//             </div>
-//             <Footer />
-//           </div>
-//         </PrivateRoute>
-//         {/* Otras rutas */}
-//       </Routes>
-//     </AuthProvider>
-//   </Router>
-// );
-// }; 
 export default App;
