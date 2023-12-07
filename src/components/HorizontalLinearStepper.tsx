@@ -19,7 +19,7 @@ const steps = [
   'Solicitudes',
 ];
 interface SolicitudesTablaProps {
-  datos: /*tipo de datos*/;
+  datos: string;
 }
 const forms = [
   <DGECForm />,
@@ -30,7 +30,7 @@ const forms = [
 ];
 
 interface SolicitudesTablaProps {
-  datos?: /*Tipo de datos*/;
+  datos: string /*Tipo de datos*/;
 }
 
 const HorizontalLinearStepper: React.FC = () => {

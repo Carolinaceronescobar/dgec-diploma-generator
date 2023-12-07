@@ -48,7 +48,7 @@ const authenticateUser = (email: string): void => {
             // llenar con otros correos:
             // 
             default: 
-            navigate('./Formulario');
+            navigate('./home');
              console.log('Error de autenticacion');
     }         
   };

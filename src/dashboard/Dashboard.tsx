@@ -1,23 +1,33 @@
-import * as React from 'react';
+import React from 'react';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import MuiDrawer from '@mui/material/Drawer';
-import Box from '@mui/material/Box';
+import {
+  Box,
+  Toolbar,
+  IconButton,
+  Typography,
+  Badge,
+  Container,
+  Grid,
+  Paper,
+  Link,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemButton ,
+  Divider,
+} from '@mui/material';
+import {
+  ChevronLeft as ChevronLeftIcon,
+  Menu as MenuIcon,
+  Notifications as NotificationsIcon,
+} from '@mui/icons-material';
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import Badge from '@mui/material/Badge';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid';
-import Paper from '@mui/material/Paper';
-import Link from '@mui/material/Link';
-import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import NotificationsIcon from '@mui/icons-material/Notifications';
+import MuiDrawer from '@mui/material/Drawer';
 import { mainListItems, secondaryListItems } from './listItems';
+import Chart from '../components/Chart';
+import Deposits from '../components/Deposits';
+import Orders from '../components/Orders';
 import SolicitudesTabla from './SolicitudesForm';
 
 function Copyright(props: any) {
@@ -83,36 +93,31 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
-const datosDeEjemplo = [
-  { id: 1, nombre: 'usuariodirector@mail.com', descripcion: 'Curso Ciberseguridad' },
-  { id: 2, nombre: 'usuariodirector@mail.com', descripcion: 'Diplomado Quimica 2' },
-  // Agrega más datos según sea necesario
-];
-
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
-export default function Dashboard() {
+const Dashboard: React.FC = () => {
   const [open, setOpen] = React.useState(true);
+
   const toggleDrawer = () => {
     setOpen(!open);
   };
-// Datos de ejemplo para SolicitudesTabla
-const solicitudesData = [
-  {
-    id: 1,
-    fecha: '2023-01-01',
-    programa: 'Programa 1',
-    departamento: 'Departamento 1',
-    campus: 'Campus 1',
-    estado: 'Pendiente',
-    revisionDGEC: false,
-    revisionDIREST: false,
-    revisionFINANZAS: false,
-  },
-  // Agrega más datos según sea necesario
-];
 
+  // Datos de ejemplo para SolicitudesTabla
+  const solicitudesData = [
+    {
+      id: 1,
+      fecha: '2023-01-01',
+      programa: 'Programa 1',
+      departamento: 'Departamento 1',
+      campus: 'Campus 1',
+      estado: 'Pendiente',
+      revisionDGEC: false,
+      revisionDIREST: false,
+      revisionFINANZAS: false,
+    },
+    // Agrega más datos según sea necesario
+  ];
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -136,14 +141,8 @@ const solicitudesData = [
             >
               <MenuIcon />
             </IconButton>
-            <Typography
-              component="h1"
-              variant="h6"
-              color="inherit"
-              noWrap
-              sx={{ flexGrow: 1 }}
-            >
-              Dashboard
+            <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
+              DGEC
             </Typography>
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
@@ -167,18 +166,32 @@ const solicitudesData = [
           </Toolbar>
           <Divider />
           <List component="nav">
-            {mainListItems}
-            <Divider sx={{ my: 1 }} />
-            {secondaryListItems}
+            {mainListItems.map((item) => (
+              <ListItemButton  key={item.id}  component={Link} to={item.route}>
+                {/* Tu contenido individual del elemento de la lista */}
+                <ListItemText primary={item.text} />
+                {/* ... otros componentes de elementos de lista según sea necesario */}
+              </ListItemButton >
+            ))}
+          </List>
+
+          <Divider sx={{ my: 1 }} />
+
+          <List component="nav">
+            {secondaryListItems.map((item) => (
+              <ListItem key={item.id}>
+                {/* Tu contenido individual del elemento de la lista */}
+                <ListItemText primary={item.text} />
+                {/* ... otros componentes de elementos de lista según sea necesario */}
+              </ListItem>
+            ))}
           </List>
         </Drawer>
         <Box
           component="main"
           sx={{
             backgroundColor: (theme) =>
-              theme.palette.mode === 'light'
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
+              theme.palette.mode === 'light' ? theme.palette.grey[100] : theme.palette.grey[900],
             flexGrow: 1,
             height: '100vh',
             overflow: 'auto',
@@ -187,36 +200,12 @@ const solicitudesData = [
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-              {/* Chart */}
-              <Grid item xs={12} md={8} lg={9}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  <Chart />
-                </Paper>
-              </Grid>
-              {/* Recent Deposits */}
-              <Grid item xs={12} md={4} lg={3}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  <Deposits />
-                </Paper>
-              </Grid>
+             
               {/* Recent Orders */}
               <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Orders />
+                  {/* Integra SolicitudesTabla con los datos */}
+                  <SolicitudesTabla solicitudes={solicitudesData} />
                 </Paper>
               </Grid>
             </Grid>
@@ -226,4 +215,6 @@ const solicitudesData = [
       </Box>
     </ThemeProvider>
   );
-}
+};
+
+export default Dashboard;

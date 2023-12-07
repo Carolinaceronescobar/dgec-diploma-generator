@@ -13,6 +13,7 @@ import Dashboard from './dashboard/Dashboard';
 import UsoInternoFinanzas from './components/Form/UsoInterno/UsointernoFinanzasForm';
 import UsoInternoDGEC from './components/Form/UsoInterno/UsointernoDGEC';
 import UsointernoDireccionEstudios from './components/Form/UsoInterno/UsointernoDireccionEstudios';
+import Formulario from './Formulario';
 
 const App = () => {
   const handleLogin = () => {
@@ -22,7 +23,9 @@ const App = () => {
         <AuthProvider>
         <Routes>
           <Route path="/" element={<LoginPage />} />
-          <Route path="/formulario" element={<Dashboard/>} />
+          <Route path="/home" element={<Dashboard/>} />
+          <Route path="/formulario" element={<Formulario/>} />
+
           <Route path="/finanzas" element={<UsoInternoFinanzas />} />
           <Route path="/Dgec" element={<UsoInternoDGEC />} />
           <Route path="/DireccionEstudios" element={<UsointernoDireccionEstudios/>} /> 

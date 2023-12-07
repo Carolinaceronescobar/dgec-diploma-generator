@@ -16,32 +16,36 @@ const TopBar: React.FC = () => {
   const [usuario, setUsuario] = useState<any>(null);
 
  // Función para obtener el nombre de usuario después de iniciar sesión 
-  const obtenerUserNameDeAlgunaManera = () => {
-    
+  const obtenerNombreUsuario= () => {
     //Suponiendo que el nombre de usuario esta almacenado en el local "storage" después de inicio de sesión
     const token= localStorage.getItem('token');
     const usuario= token ? JSON.parse(atob(token.split('.')[1])) : null;
 
+//Devuelve el nombre de usuario o null si no hay usuario
     return usuario ? usuario.userName : null;
   };
 
     // Efecto para obtener información del usuario después de montar el componente
+  // Efecto para obtener información del usuario después de montar el componente
   useEffect(() => {
-    //suponemos tener el userName después de iniciar sesión
-    const userName = obtenerUserNameDeAlgunaManera ();
-    //Llama a la función para obtener información del usuario si hay un nombre de usuario
+    const token = localStorage.getItem('token');
+    const usuario = token ? JSON.parse(atob(token.split('.')[1])) : { username: 'carolina' };
   
-    if (userName) {
-    obtenerInformacionUsuario(userName)
-  .then((data) => {
-    setUsuario(data);
-  })
-  .catch((error) => {
-    // Maneja el error si es necesario
-    console.error('Error al obtener información del usuario', error);
-  });
-}
-}, []); // La dependencia está vacía porque solo queremos que se ejecute una vez al montar el componente
+    if (usuario && usuario.userName) {
+      obtenerInformacionUsuario(usuario.userName)
+        .then((data) => {
+          setUsuario(data);
+        })
+        .catch((error) => {
+          console.error('Error al obtener información del usuario', error);
+        });
+    }
+  }, []); 
+  
+  // La dependencia está vacía porque solo queremos que se ejecute una vez al montar el componente
+ // La dependencia está vacía porque solo queremos que se ejecute una vez al montar el componente
+
+    // La dependencia está vacía porque solo queremos que se ejecute una vez al montar el componente
 
  // Función para manejar el cierre del menú desplegable
   const handleClose = () => {
@@ -58,6 +62,7 @@ const TopBar: React.FC = () => {
       // Implementar la lógica para cerrar sesión
       console.log('Cerrando sesión...');
     };
+console.log(usuario);
 
 return (
   <AppBar position="static" style={{ backgroundColor: '#004B85' }}>
@@ -98,22 +103,22 @@ return (
 
       {/* Mostrar opciones según el perfil de usuario */}
       {usuario && (
-          <Button color="inherit" href="./Formulario.tsx" style={{ fontFamily: 'Roboto Condensed', color: 'white' }}>
+          <Button color="inherit" href="./formulario" style={{ fontFamily: 'Roboto Condensed', color: 'white' }}>
             Formulario Director Programa
           </Button>
         )}
         {usuario && usuario.perfil === 'usuario2' && (
-          <Button color="inherit" href="./src/components/Form/UsoInterno/UsointernoDGEC.tsx" style={{ fontFamily: 'Roboto Condensed', color: 'white' }}>
+          <Button color="inherit" href="./usointernoDGEC" style={{ fontFamily: 'Roboto Condensed', color: 'white' }}>
             Uso Interno DGEC
           </Button>
         )}
         {usuario && usuario.perfil === 'usuario3' && (
-          <Button color="inherit" href="./src/components/Form/UsoInterno/UsointernoFinanzasForm.tsx" style={{ fontFamily: 'Roboto Condensed', color: 'white' }}>
+          <Button color="inherit" href="./usointernoFinanzas" style={{ fontFamily: 'Roboto Condensed', color: 'white' }}>
             Uso Interno Finanzas
           </Button>
         )}
         {usuario && usuario.perfil === 'usuario4' && (
-          <Button color="inherit" href="./src/components/Form/UsoInterno/UsointernoDireccionEstudios.tsx" style={{ fontFamily: 'Roboto Condensed', color: 'white' }}>
+          <Button color="inherit" href="./usointernoDireccionEstudios" style={{ fontFamily: 'Roboto Condensed', color: 'white' }}>
             Uso Interno Dirección de Estudios
           </Button>
         )}

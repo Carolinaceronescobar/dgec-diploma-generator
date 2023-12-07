@@ -46,6 +46,10 @@ const UsoInternoFinanzas: React.FC<UsointernoFinanzasProps> = ({
   onGuardar,
   onEnviar,
 }) => { 
+
+  console.log ('*')
+  console.log(campos)
+
   return (
     <Box>
       <Typography variant="h5" sx={{ marginTop: 2, marginBottom: 2, fontWeight: 'bold' }}>Uso interno Finanzas</Typography>
@@ -55,7 +59,7 @@ const UsoInternoFinanzas: React.FC<UsointernoFinanzasProps> = ({
         <TextField
           fullWidth
           label="INTERNO - Código de la Organización (Banner) "
-          value={campos.fin_valoraraprog} /* Corregido aquí */
+          value={campos?.fin_valoraraprog || ""} /* Corregido aquí */
           onChange={(e) => setCampos((prevCampos) => ({ ...prevCampos, fin_valoraraprog: e.target.value }))}
           variant="outlined"
           InputProps={{ readOnly: readOnly }}
@@ -67,7 +71,7 @@ const UsoInternoFinanzas: React.FC<UsointernoFinanzasProps> = ({
         <TextField
           fullWidth
           label="INTERNO - Código de Detalle (Banner) "
-          value={campos.fin_valormatprog} /* Corregido aquí */
+          value={campos?.fin_valormatprog || ""} /* Corregido aquí */
           onChange={(e) => setCampos((prevCampos) => ({ ...prevCampos, fin_valormatprog: e.target.value }))}
           variant="outlined"
           InputProps={{ readOnly: readOnly }}
@@ -82,7 +86,7 @@ const UsoInternoFinanzas: React.FC<UsointernoFinanzasProps> = ({
             row
             aria-label="haDictadoPrograma"
             name="haDictadoPrograma"
-            value={campos.fin_valordescprog.fin_valordescprog_2.checked} /* Corregido aquí */
+            value={campos?.fin_valordescprog?.fin_valordescprog_2.checked || false} /* Corregido aquí */
             onChange={(e) =>
               setCampos((prevCampos) => ({
                 ...prevCampos,
